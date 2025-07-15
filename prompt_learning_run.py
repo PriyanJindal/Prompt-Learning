@@ -16,9 +16,30 @@ In this cookbook, we demonstrate a use case of the Arize Prompt Learning SDK by 
 #!pip install arize-phoenix-evals arize-phoenix-client tiktoken openai arize-toolkit
 
 # CONFIG: Number of samples to use for the experiment. Adjust as needed.
-NUM_SAMPLES = 40  # Number of rows to sample from the full dataset, 0 for all
+NUM_SAMPLES = 100  # Number of rows to sample from the full dataset, 0 for all
 TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for testing)
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
+
+# EXPERIMENT CONFIGURATION
+RUN_MULTI_RULE_EXPERIMENTS = True  # Set to True to run experiments with multiple rule counts
+RULE_COUNTS_TO_TEST = [10, 50, 100]  # Rule counts to test in multi-rule experiments
+NUM_OPTIMIZATION_LOOPS = 5  # Number of optimization loops per experiment
+
+# USAGE EXAMPLES:
+# 1. Single experiment with 50 rules (default):
+#    - Set RUN_MULTI_RULE_EXPERIMENTS = False
+#    - Results saved to "single_experiment_results.json"
+#
+# 2. Multi-rule experiments:
+#    - Set RUN_MULTI_RULE_EXPERIMENTS = True
+#    - Adjust RULE_COUNTS_TO_TEST as needed
+#    - Results saved to "multi_rule_experiments.json"
+#
+# 3. Load previous results:
+#    - Use load_experiment_results("filename.json")
+#
+# 4. Control optimization loops:
+#    - Set NUM_OPTIMIZATION_LOOPS to control how many iterations per experiment
 
 import nest_asyncio, re
 nest_asyncio.apply()
@@ -136,12 +157,11 @@ def rule_checker_parser(response: str, row_index: int) -> dict:
         "rule_violations": explanation
     }
 
-def evaluate_output(dataset):
+def evaluate_output(dataset, num_rules=NUM_RULES):
     """Evaluator that checks JSON web page correctness using llm_generate"""
 
     # Create the evaluation template
-
-    with open("evaluator-prompt-50.txt", "r") as file:
+    with open(f"prompts/evaluator-prompt-{num_rules}.txt", "r") as file:
         evaluation_template = file.read()
 
     # Create the model
@@ -171,11 +191,11 @@ def evaluate_output(dataset):
 
     return dataset, ["correctness", "explanation"]
 
-def rule_checker(dataset):
+def rule_checker(dataset, num_rules=NUM_RULES):
     """Evaluator that checks which rules are broken using llm_generate"""
 
     # Create the rule checking template
-    with open("rule-checker-prompt-50.txt", "r") as file:
+    with open(f"prompts/rule-checker-prompt-{num_rules}.txt", "r") as file:
         rule_check_template = file.read()
 
     # Create the model
@@ -203,29 +223,6 @@ def rule_checker(dataset):
         dataset["rule_violations"] = rule_check_results["rule_violations"]
 
     return dataset, ["rule_violations"]
-
-def rules_followed_metric(dataset):
-    with open("metrics-prompt-50.txt", "r") as file:
-        metric_prompt = file.read()
-
-    eval_model = OpenAIModel(
-        model="gpt-4.1-2025-04-14",
-        model_kwargs={
-            "temperature": 0
-        }
-    )
-
-    rule_followed_results = llm_generate(
-        dataframe=dataset,
-        template=metric_prompt,
-        model=eval_model,
-        output_parser=rule_checker_parser,
-        concurrency=40,
-        verbose=True
-    )
-
-    results = []
-    return rule_followed_results
 
 from phoenix.evals import llm_generate
 
@@ -292,11 +289,13 @@ def optimize_loop(
     evaluators,
     threshold=0.7,
     loops=5,
-    scorer="accuracy"
+    scorer="accuracy",
+    num_rules=NUM_RULES
 ):
     """
     scorer: one of "accuracy", "f1", "precision", "recall"
     threshold: float, threshold for the selected metric
+    num_rules: int, number of rules to use for evaluation (determines which prompt files to load)
 
     Returns:
         dict with keys:
@@ -304,6 +303,7 @@ def optimize_loop(
             "test": list of test set scores per run
             "prompt": list of system prompts used for each test run
             "raw": list of test set DataFrames (deepcopy) for each test run
+            "num_rules": number of rules used for this experiment
     """
     import copy
 
@@ -314,11 +314,13 @@ def optimize_loop(
     raw_dfs = []
 
     print(f"🚀 Starting prompt optimization with {loops} iterations (scorer: {scorer}, threshold: {threshold})")
+    print()
     
     # Initial test evaluation before optimization
-    print(f"\n📊 Initial evaluation:")
+    print(f"📊 Initial evaluation:")
     test_set["output"] = generate_output(test_set, system_prompt)
-    test_evals_all = evaluate_output(test_set)[0]
+    
+    test_evals_all = evaluate_output(test_set, num_rules)[0]
     test_evals = test_evals_all["correctness"]
     y_true = ["correct"] * len(test_evals)
     y_pred = test_evals
@@ -328,16 +330,18 @@ def optimize_loop(
     raw_dfs.append(copy.deepcopy(test_set))
     
     print(f"✅ Initial test {scorer}: {initial_metric_value}")
-    print("\n")
+    print('\n')
     
     if initial_metric_value >= threshold:
         print(f"🎉 Initial prompt already meets threshold!")
-        return {
+        result = {
             "train": train_metrics,
             "test": test_metrics,
             "prompt": prompts,
-            "raw": raw_dfs
+            "raw": raw_dfs,
+            "num_rules": num_rules
         }
+        return result
     
     while loops > 0:
         print(f"📊 Loop {curr_loop}: Optimizing prompt...")
@@ -356,9 +360,21 @@ def optimize_loop(
             openai_api_key=os.getenv("OPENAI_API_KEY")
         )
 
+        # Create evaluators with the correct num_rules parameter
+        # this is necessary because the evaluators are defined with a default value of NUM_RULES.
+        # Your evaluators might be defined differently.
+        evaluators_with_rules = []
+        for evaluator in evaluators:
+            if evaluator.__name__ == 'evaluate_output':
+                evaluators_with_rules.append(lambda ds, nr=num_rules: evaluate_output(ds, nr))
+            elif evaluator.__name__ == 'rule_checker':
+                evaluators_with_rules.append(lambda ds, nr=num_rules: rule_checker(ds, nr))
+            else:
+                evaluators_with_rules.append(evaluator)
+        
         train_set, _ = optimizer.run_evaluators(
             train_set,
-            evaluators,
+            evaluators_with_rules,
             feedback_columns=["correctness", "explanation", "rule_violations"]
         )
 
@@ -373,7 +389,7 @@ def optimize_loop(
         train_outputs_post = generate_output(train_set, system_prompt)
         train_set_post = train_set.copy()
         train_set_post["output"] = train_outputs_post
-        train_evals_post_all = evaluate_output(train_set_post)[0]
+        train_evals_post_all = evaluate_output(train_set_post, num_rules)[0]
         train_evals_post = train_evals_post_all["correctness"]
         y_true_train_post = ["correct"] * len(train_evals_post)
         y_pred_train_post = train_evals_post
@@ -383,7 +399,8 @@ def optimize_loop(
 
         # 2. Test set evaluation with optimized prompt
         test_set["output"] = generate_output(test_set, system_prompt)
-        test_evals_all = evaluate_output(test_set)[0]
+        
+        test_evals_all = evaluate_output(test_set, num_rules)[0]
         test_evals = test_evals_all["correctness"]
         y_true = ["correct"] * len(test_evals)
         y_pred = test_evals
@@ -398,30 +415,234 @@ def optimize_loop(
         # 3. Check threshold
         if metric_value >= threshold:
             print(f"🎉 Threshold reached! Stopping optimization.")
-            return {
+            result = {
                 "train": train_metrics,
                 "test": test_metrics,
                 "prompt": prompts,
-                "raw": raw_dfs
+                "raw": raw_dfs,
+                "num_rules": num_rules
             }
+            return result
 
         loops -= 1
         curr_loop += 1
 
     print(f"🔄 All {curr_loop-1} optimization loops completed.")
-    return {
+    result = {
         "train": train_metrics,
         "test": test_metrics,
         "prompt": prompts,
-        "raw": raw_dfs
+        "raw": raw_dfs,
+        "num_rules": num_rules
     }
+    return result
 
-evaluators = [evaluate_output, rule_checker]
-results = optimize_loop(
-    train_set, test_set, system_prompt, evaluators
-)
+def validate_prompt_files(rule_counts):
+    """Validate that all required prompt files exist for the given rule counts."""
+    import os
+    
+    missing_files = []
+    for num_rules in rule_counts:
+        required_files = [
+            f"prompts/evaluator-prompt-{num_rules}.txt",
+            f"prompts/rule-checker-prompt-{num_rules}.txt"
+        ]
+        
+        for file_path in required_files:
+            if not os.path.exists(file_path):
+                missing_files.append(file_path)
+    
+    if missing_files:
+        print("❌ Missing prompt files:")
+        for file_path in missing_files:
+            print(f"   - {file_path}")
+        print("\nAvailable prompt files:")
+        for file_path in os.listdir("prompts"):
+            print(f"   - prompts/{file_path}")
+        raise FileNotFoundError(f"Missing {len(missing_files)} required prompt files")
+    
+    print("✅ All required prompt files found")
 
-"""## Now you have your optimized system prompt!"""
+def save_experiment_results(results, filename="experiment_results.json"):
+    """Save experiment results to a JSON file."""
+    import json
+    from datetime import datetime
+    
+    # Add timestamp to results
+    results_with_timestamp = {
+        "timestamp": datetime.now().isoformat(),
+        "results": results
+    }
+    
+    with open(filename, 'w') as f:
+        json.dump(results_with_timestamp, f, indent=2, default=str)
+    
+    print(f"✅ Results saved to {filename}")
 
-print(results)
+def save_single_experiment_csv(results, filename):
+    """
+    Save a single experiment's results to CSV format.
+    
+    Args:
+        results: Results from a single optimize_loop run
+        filename: Output CSV filename
+    """
+    import pandas as pd
+    from datetime import datetime
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Extract data
+    num_rules = results['num_rules']
+    train_metrics = results.get('train', [])
+    test_metrics = results['test']
+    prompts = results['prompt']
+    
+    # Create DataFrame
+    data = []
+    for i, (test_metric, prompt) in enumerate(zip(test_metrics, prompts)):
+        row = {
+            'iteration': i,
+            'num_rules': num_rules,
+            'test_accuracy': test_metric,
+            'prompt': prompt
+        }
+        
+        # Add train metric if available
+        if i < len(train_metrics):
+            row['train_accuracy'] = train_metrics[i]
+        
+        data.append(row)
+    
+    df = pd.DataFrame(data)
+    
+    # Save to CSV with timestamp
+    filename_with_timestamp = f"{filename}_{timestamp}.csv"
+    df.to_csv(filename_with_timestamp, index=False)
+    print(f"✅ Results saved to {filename_with_timestamp}")
+    print(f"   📊 {len(df)} iterations, {num_rules} rules")
+    print(f"   📈 Final accuracy: {df['test_accuracy'].iloc[-1]:.3f}")
+
+def save_multi_experiment_csv(results, base_filename="experiment_results"):
+    """
+    Save multiple experiments' results to separate CSV files.
+    
+    Args:
+        results: Results from run_multi_rule_experiments
+        base_filename: Base name for the CSV files
+    """
+    from datetime import datetime
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    for experiment_name, experiment_results in results.items():
+        csv_filename = f"{base_filename}_{experiment_name}_{timestamp}.csv"
+        save_single_experiment_csv(experiment_results, csv_filename)
+
+
+
+def run_multi_rule_experiments(
+    train_set,
+    test_set,
+    system_prompt,
+    rule_counts=[10, 50, 100],
+    threshold=0.7,
+    loops=5,
+    scorer="accuracy"
+):
+    """
+    Run optimization experiments with different numbers of rules.
+    
+    Args:
+        train_set: Training dataset
+        test_set: Test dataset
+        system_prompt: Initial system prompt
+        rule_counts: List of rule counts to test
+        threshold: Threshold for stopping optimization
+        loops: Number of optimization loops
+        scorer: Metric to use for evaluation
+        
+    Returns:
+        dict: Results for each rule count experiment
+    """
+    all_results = {}
+    
+    print(f"🚀 Starting multi-rule experiments with rule counts: {rule_counts}")
+    print("=" * 80)
+    
+    # Validate that all required prompt files exist
+    validate_prompt_files(rule_counts)
+    
+    for num_rules in rule_counts:
+        print(f"\n📊 Running experiment with {num_rules} rules...")
+        print("-" * 60)
+        
+        # Update global NUM_RULES for this experiment
+        global NUM_RULES
+        NUM_RULES = num_rules
+        
+        # Run optimization for this rule count
+        evaluators = [evaluate_output, rule_checker]
+        results = optimize_loop(
+            train_set, test_set, system_prompt, evaluators,
+            threshold=threshold,
+            loops=loops,
+            scorer=scorer,
+            num_rules=num_rules
+        )
+        
+        all_results[f"{num_rules}_rules"] = results
+        
+        print(f"✅ Completed experiment with {num_rules} rules")
+        print(f"   Final test {scorer}: {results['test'][-1]:.3f}")
+    
+    print("\n" + "=" * 80)
+    print("🎉 All experiments completed!")
+    
+    # Print summary
+    print("\n📈 Summary of Results:")
+    for rule_count, results in all_results.items():
+        num_rules = results['num_rules']
+        final_test_score = results['test'][-1]
+        print(f"   {rule_count}: Test {scorer} = {final_test_score:.3f}")
+    
+    return all_results
+
+# Run experiments based on configuration
+if RUN_MULTI_RULE_EXPERIMENTS:
+    print("🚀 Running multi-rule experiments...")
+    multi_results = run_multi_rule_experiments(
+        train_set, test_set, system_prompt,
+        rule_counts=RULE_COUNTS_TO_TEST,
+        loops=NUM_OPTIMIZATION_LOOPS
+    )
+    
+    # Save results
+    save_experiment_results(multi_results, "multi_rule_experiments.json")
+    
+    # Save CSV results
+    save_multi_experiment_csv(multi_results, "multi_rule_experiments")
+    
+    print("\n📊 Multi-rule experiment results:")
+    print(multi_results)
+else:
+    print("🚀 Running single experiment...")
+    
+    # Validate that required prompt files exist
+    validate_prompt_files([NUM_RULES])
+    
+    evaluators = [evaluate_output, rule_checker]
+    results = optimize_loop(
+        train_set, test_set, system_prompt, evaluators,
+        loops=NUM_OPTIMIZATION_LOOPS
+    )
+    
+    # Save results
+    save_experiment_results(results, "single_experiment_results.json")
+    
+    # Save CSV results
+    save_single_experiment_csv(results, "single_experiment")
+    
+    print("\n📊 Single experiment results:")
+    print(results)
 
