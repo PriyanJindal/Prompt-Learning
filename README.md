@@ -198,59 +198,16 @@ python prompt_learning_run.py
 | **Compute Cost** | Front-loaded (search); negligible at inference | Minimal upfront, <1 extra call per optimization |
 | **Interpretability** | Final prompt readable, reasoning hidden in search logs | Full audit trail: every instruction edit in plain English |
 
-## Literature Review
-
-### Relevant Approaches
-
-- **Promptbreeder (DeepMind)**: Prompt edits but no English critiques
-- **OPRO – "LLMs as Optimizers"**: Prompt edits but no English critiques  
-- **PromptAgent**: Uses free-form critiques but doesn't embed them in final prompt
-- **StablePrompt**: RL updates instead of prompt edits
-- **Meta-Prompting: Task-Agnostic Scaffolding**: First use of metaprompt but no English critiques
-- **Critic-RM**: Self-generated critiques for reward modeling
-- **Self-Refine**: Iterative refinement with self-feedback
-
-## Limitations and Future Work
-
-### Current Limitations
-- Requires structured English feedback
-- Limited to specific prompt sections
-- May not generalize to all domains
-
-### Future Directions
-- Integration with MCTS-based search (like PromptAgent)
-- Multi-modal feedback support
-- Cross-domain generalization
-- Advanced instruction management
-
-## Citation
-
-If you use this research in your work, please cite:
-
-```bibtex
-@misc{prompt_learning_2024,
-  title={Exploring Prompt Learning: Using English Feedback to Optimize LLM Systems},
-  author={[Your Name]},
-  year={2024},
-  url={https://github.com/PriyanJindal/meta-prompt-optimization}
-}
-```
-
 ## Contributing
 
 This is a research repository. For contributions:
 
 1. Create a new branch for your experiment
-2. Document your methodology in `research/notebooks/`
-3. Update this README with findings
-4. Submit a pull request
-
-## License
-
-[Add your license here]
+2. Update this README with findings
+3. Submit a pull request
 
 ## Contact
 
-For questions about the research, contact: [Your Email]
+For questions about the research, contact: pjindal@arize.com
 
 
