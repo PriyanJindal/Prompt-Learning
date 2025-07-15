@@ -82,15 +82,30 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 ## Repository Structure
 
 ```
-prompt-opt-sdk/
-├── research/
-│   ├── notebooks/           # Jupyter notebooks for experiments
-│   ├── experiments/         # Experimental configurations and results
-│   └── papers/             # Research papers and documentation
-├── src/                    # Core implementation (will be moved to separate package)
+Prompt-Learning/
 ├── data/                   # Datasets and evaluation data
-├── prompts/                # Prompt templates and examples
-└── docs/                   # Documentation and guides
+│   ├── queries.csv        # Main dataset
+│   └── README.md          # Data documentation
+├── prompts/               # Prompt templates for different rule counts
+│   ├── evaluator-prompt-10.txt
+│   ├── evaluator-prompt-50.txt
+│   ├── evaluator-prompt-100.txt
+│   ├── rule-checker-prompt-10.txt
+│   ├── rule-checker-prompt-50.txt
+│   ├── rule-checker-prompt-100.txt
+│   ├── metrics-prompt-10.txt
+│   ├── metrics-prompt-50.txt
+│   └── metrics-prompt-100.txt
+├── notebooks/             # Jupyter notebooks for experiments      
+│   └── prompt_learning_cookbook_AX.ipynb
+├── meta_prompt.py         # Core meta-prompt implementation
+├── meta_prompt_optimizer.py # Meta-prompt optimizer
+├── prompt_learning_run.py # Main experiment runner
+├── tiktoken_splitter.py   # Token counting utilities
+├── train.csv              # Training dataset
+├── test.csv               # Test dataset
+├── requirements.txt       # Python dependencies
+└── README.md             # This file
 ```
 
 ## Quick Start
@@ -132,6 +147,16 @@ optimized_prompt = optimizer.optimize(
     output_column='output',
     feedback_columns=['feedback']
 )
+```
+
+### Running Experiments
+
+```python
+# Single experiment
+python prompt_learning_run.py
+
+# Multi-rule experiments (10, 50, 100 rules)
+# Edit RUN_MULTI_RULE_EXPERIMENTS = True in prompt_learning_run.py
 ```
 
 ## Key Innovations
