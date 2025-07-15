@@ -88,7 +88,7 @@ dataset_1000 = pd.read_csv("https://storage.googleapis.com/arize-assets/dev-rel/
 
 dataset_50 = dataset_1000.sample(NUM_SAMPLES) if NUM_SAMPLES > 0 else dataset_1000
 
-# 80-20 split
+# split
 train_set = dataset_50.sample(frac=TRAIN_SPLIT_FRACTION, random_state=42)
 test_set = dataset_50.drop(train_set.index)
 
@@ -185,6 +185,7 @@ def evaluate_output(dataset, num_rules=NUM_RULES):
 
     # Merge the results back into the original dataset
     dataset = dataset.copy()
+
     for col in ["correctness", "explanation"]:
         if col in evaluation_results.columns:
             dataset[col] = evaluation_results[col]
