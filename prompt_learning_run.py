@@ -314,27 +314,90 @@ def optimize_loop(
     raw_dfs = []
 
     print(f"🚀 Starting prompt optimization with {loops} iterations (scorer: {scorer}, threshold: {threshold})")
+    
+    # Initial test evaluation before optimization
+    print(f"\n📊 Initial evaluation:")
+    test_set["output"] = generate_output(test_set, system_prompt)
+    test_evals_all = evaluate_output(test_set)[0]
+    test_evals = test_evals_all["correctness"]
+    y_true = ["correct"] * len(test_evals)
+    y_pred = test_evals
+    initial_metric_value = compute_metric(y_true, y_pred, scorer=scorer)
+    test_metrics.append(initial_metric_value)
+    prompts.append(system_prompt)
+    raw_dfs.append(copy.deepcopy(test_set))
+    
+    print(f"✅ Initial test {scorer}: {initial_metric_value}")
+    print("\n")
+    
+    if initial_metric_value >= threshold:
+        print(f"🎉 Initial prompt already meets threshold!")
+        return {
+            "train": train_metrics,
+            "test": test_metrics,
+            "prompt": prompts,
+            "raw": raw_dfs
+        }
+    
     while loops > 0:
-        print(f"\n📊 Loop {curr_loop}: Testing current prompt...")
-        # Test set evaluation
-        test_set["output"] = generate_output(test_set, system_prompt)
+        print(f"📊 Loop {curr_loop}: Optimizing prompt...")
+        
+        # 1. Train set evaluation and optimization
+        train_outputs = generate_output(train_set, system_prompt)
+        train_set["output"] = train_outputs
 
+        train_set["correctness"] = [None] * len(train_set)
+        train_set["explanation"] = [None] * len(train_set)
+        train_set["rule_violations"] = [None] * len(train_set)
+
+        optimizer = MetaPromptOptimizer(
+            prompt=system_prompt,
+            model_choice="gpt-4.1-2025-04-14",
+            openai_api_key=os.getenv("OPENAI_API_KEY")
+        )
+
+        train_set, _ = optimizer.run_evaluators(
+            train_set,
+            evaluators,
+            feedback_columns=["correctness", "explanation", "rule_violations"]
+        )
+
+        system_prompt = optimizer.optimize(
+            train_set,
+            "output",
+            feedback_columns=["correctness", "explanation", "rule_violations"],
+            context_size_k=128000
+        )
+
+        # Evaluate train set after optimization
+        train_outputs_post = generate_output(train_set, system_prompt)
+        train_set_post = train_set.copy()
+        train_set_post["output"] = train_outputs_post
+        train_evals_post_all = evaluate_output(train_set_post)[0]
+        train_evals_post = train_evals_post_all["correctness"]
+        y_true_train_post = ["correct"] * len(train_evals_post)
+        y_pred_train_post = train_evals_post
+        train_metric_post_value = compute_metric(y_true_train_post, y_pred_train_post, scorer=scorer)
+        train_metrics.append(train_metric_post_value)
+        print(f"✅ Train {scorer}: {train_metric_post_value}")
+
+        # 2. Test set evaluation with optimized prompt
+        test_set["output"] = generate_output(test_set, system_prompt)
         test_evals_all = evaluate_output(test_set)[0]
         test_evals = test_evals_all["correctness"]
         y_true = ["correct"] * len(test_evals)
         y_pred = test_evals
-
         metric_value = compute_metric(y_true, y_pred, scorer=scorer)
-
-        # Store test metrics for this run (only score)
         test_metrics.append(metric_value)
         prompts.append(system_prompt)
         raw_dfs.append(copy.deepcopy(test_set))
-
-      
+        
         print(f"✅ Test {scorer}: {metric_value}")
         print("\n")
+        
+        # 3. Check threshold
         if metric_value >= threshold:
+            print(f"🎉 Threshold reached! Stopping optimization.")
             return {
                 "train": train_metrics,
                 "test": test_metrics,
@@ -342,75 +405,10 @@ def optimize_loop(
                 "raw": raw_dfs
             }
 
-        else:
-            print(f"🔄 {len(test_evals) - sum(1 for item in test_evals if item == 'correct')} test queries failed. Optimizing prompt...")
-            # Train set evaluation
-            train_outputs = generate_output(train_set, system_prompt)
-            train_set["output"] = train_outputs
+        loops -= 1
+        curr_loop += 1
 
-            train_set["correctness"] = [None] * len(train_set)
-            train_set["explanation"] = [None] * len(train_set)
-            train_set["rule_violations"] = [None] * len(train_set)
-
-            optimizer = MetaPromptOptimizer(
-                prompt=system_prompt,
-                model_choice="gpt-4.1-2025-04-14",
-                openai_api_key=os.getenv("OPENAI_API_KEY")
-            )
-
-            train_set, _ = optimizer.run_evaluators(
-                train_set,
-                evaluators,
-                feedback_columns=["correctness", "explanation", "rule_violations"]
-            )
-
-            # Evaluate train set after optimization
-            train_outputs_post = generate_output(train_set, system_prompt)
-            train_set_post = train_set.copy()
-            train_set_post["output"] = train_outputs_post
-            train_evals_post_all = evaluate_output(train_set_post)[0]
-            train_evals_post = train_evals_post_all["correctness"]
-            y_true_train_post = ["correct"] * len(train_evals_post)
-            y_pred_train_post = train_evals_post
-            train_metric_post_value = compute_metric(y_true_train_post, y_pred_train_post, scorer=scorer)
-            train_metrics.append(train_metric_post_value)
-            print(f"✅ Train {scorer}: {train_metric_post_value}")
-
-            system_prompt = optimizer.optimize(
-                train_set,
-                "output",
-                feedback_columns=["correctness", "explanation", "rule_violations"],
-                context_size_k=128000
-            )
-
-            loops -= 1
-            curr_loop += 1
-
-    # Final evaluation after all loops
-    test_outputs = generate_output(test_set, system_prompt)
-    test_set["output"] = test_outputs
-    test_evals_all = evaluate_output(test_set)[0]
-    test_evals = test_evals_all["correctness"]
-    y_true = ["correct"] * len(test_evals)
-    y_pred = test_evals
-    metric_value = compute_metric(y_true, y_pred, scorer=scorer)
-    test_metrics.append(metric_value)
-    prompts.append(system_prompt)
-    raw_dfs.append(copy.deepcopy(test_set))
-
-    # Final train evaluation with optimized prompt
-    train_outputs_final = generate_output(train_set, system_prompt)
-    train_set_final = train_set.copy()
-    train_set_final["output"] = train_outputs_final
-    train_evals_final_all = evaluate_output(train_set_final)[0]
-    train_evals_final = train_evals_final_all["correctness"]
-    y_true_train_final = ["correct"] * len(train_evals_final)
-    y_pred_train_final = train_evals_final
-    train_metric_final_value = compute_metric(y_true_train_final, y_pred_train_final, scorer=scorer)
-    train_metrics.append(train_metric_final_value)
-
-    print(f"✅ Final test {scorer}: {metric_value} ({sum(1 for item in test_evals if item == 'correct')}/{len(test_evals)} correct)")
-    print(f"✅ Final train {scorer}: {train_metric_final_value} ({sum(1 for item in train_evals_final if item == 'correct')}/{len(train_evals_final)} correct)")
+    print(f"🔄 All {curr_loop-1} optimization loops completed.")
     return {
         "train": train_metrics,
         "test": test_metrics,
