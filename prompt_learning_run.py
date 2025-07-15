@@ -21,7 +21,7 @@ TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for tes
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
 
 # EXPERIMENT CONFIGURATION
-RUN_MULTI_RULE_EXPERIMENTS = True  # Set to True to run experiments with multiple rule counts
+RUN_MULTI_RULE_EXPERIMENTS = False  # Set to True to run experiments with multiple rule counts
 RULE_COUNTS_TO_TEST = [10, 50, 100]  # Rule counts to test in multi-rule experiments
 NUM_OPTIMIZATION_LOOPS = 5  # Number of optimization loops per experiment
 
@@ -287,7 +287,7 @@ def optimize_loop(
     test_set,
     system_prompt,
     evaluators,
-    threshold=0.7,
+    threshold=1,
     loops=5,
     scorer="accuracy",
     num_rules=NUM_RULES
