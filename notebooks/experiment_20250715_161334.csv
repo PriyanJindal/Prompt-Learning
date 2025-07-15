@@ -1,0 +1,154 @@
+iteration,test_accuracy,prompt,train_accuracy
+0,0.0,You are an expert in JSON webpage creation. This is your task: {input},0.32
+1,0.16,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}. 
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. The top-level key must be 'page' unless specified otherwise.
+2. Include a 'title' field at the root level.
+3. Every section object must have a 'type' field from the fixed vocabulary: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', 'embed'.
+4. Images must use 'src' and 'alt' fields.
+5. Forms must include 'method' and 'target' fields, and buttons must have an 'action' key with values 'navigate', 'submitForm', or 'customEvent'.
+6. Include a 'layout' field at the page level.
+7. Add an 'updatedAt' ISO-8601 timestamp at the root level.
+8. Internal links must start with '/'.
+9. Ensure all numeric values are not quoted as strings.
+
+Example JSON structure:
+
+```json
+{
+  ""page"": {
+    ""title"": ""Example Page"",
+    ""layout"": ""vertical"",
+    ""updatedAt"": ""2024-01-01T00:00:00Z"",
+    ""sections"": [
+      {
+        ""type"": ""header"",
+        ""content"": {
+          ""title"": ""Welcome to Example Page"",
+          ""subtitle"": ""An example of a JSON webpage""
+        }
+      },
+      {
+        ""type"": ""gallery"",
+        ""title"": ""Image Gallery"",
+        ""images"": [
+          {
+            ""src"": ""https://example.com/image1.jpg"",
+            ""alt"": ""Description of image 1""
+          },
+          {
+            ""src"": ""https://example.com/image2.jpg"",
+            ""alt"": ""Description of image 2""
+          }
+        ]
+      },
+      {
+        ""type"": ""form"",
+        ""method"": ""POST"",
+        ""target"": ""/submit"",
+        ""fields"": [
+          {
+            ""label"": ""Name"",
+            ""type"": ""text"",
+            ""name"": ""name"",
+            ""required"": true
+          },
+          {
+            ""label"": ""Email"",
+            ""type"": ""email"",
+            ""name"": ""email"",
+            ""required"": true
+          }
+        ],
+        ""submitButton"": {
+          ""label"": ""Submit"",
+          ""action"": ""submitForm""
+        }
+      }
+    ]
+  }
+}
+```
+
+Please ensure your JSON output is compliant with these guidelines.",0.32
+2,0.16,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}.
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. The top-level key must be 'page' unless specified otherwise.
+2. Include a 'title' field at the root level.
+3. Every section object must have a 'type' field from the fixed vocabulary: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', 'embed'.
+4. Images must use 'src' and 'alt' fields, and must include 'loading': 'lazy' to ensure they are lazy-loaded.
+5. Forms must include 'method' and 'target' fields, and buttons must have an 'action' key with values 'navigate', 'submitForm', or 'customEvent'.
+6. Include a 'layout' field at the page level.
+7. Add an 'updatedAt' ISO-8601 timestamp at the root level.
+8. Internal links must start with '/'.
+9. Ensure all numeric values are not quoted as strings.
+10. Ensure there is exactly one primary call-to-action (CTA) per page.
+11. Ratings must be capped at 5 and rounded to one decimal place.
+12. Use 'gridTemplate' for grid layouts instead of custom row/column keys.
+13. Avoid using inline HTML/CSS in 'content' fields.
+
+Example JSON structure:
+
+```json
+{
+  ""page"": {
+    ""title"": ""Example Page"",
+    ""layout"": ""vertical"",
+    ""updatedAt"": ""2024-01-01T00:00:00Z"",
+    ""sections"": [
+      {
+        ""type"": ""header"",
+        ""content"": {
+          ""title"": ""Welcome to Example Page"",
+          ""subtitle"": ""An example of a JSON webpage""
+        }
+      },
+      {
+        ""type"": ""gallery"",
+        ""title"": ""Image Gallery"",
+        ""images"": [
+          {
+            ""src"": ""https://example.com/image1.jpg"",
+            ""alt"": ""Description of image 1"",
+            ""loading"": ""lazy""
+          },
+          {
+            ""src"": ""https://example.com/image2.jpg"",
+            ""alt"": ""Description of image 2"",
+            ""loading"": ""lazy""
+          }
+        ]
+      },
+      {
+        ""type"": ""form"",
+        ""method"": ""POST"",
+        ""target"": ""/submit"",
+        ""fields"": [
+          {
+            ""label"": ""Name"",
+            ""type"": ""text"",
+            ""name"": ""name"",
+            ""required"": true
+          },
+          {
+            ""label"": ""Email"",
+            ""type"": ""email"",
+            ""name"": ""email"",
+            ""required"": true
+          }
+        ],
+        ""submitButton"": {
+          ""label"": ""Submit"",
+          ""action"": ""submitForm""
+        }
+      }
+    ]
+  }
+}
+```
+
+Please ensure your JSON output is compliant with these guidelines.",
