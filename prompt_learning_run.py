@@ -19,7 +19,6 @@ In this cookbook, we demonstrate a use case of the Arize Prompt Learning SDK by 
 NUM_SAMPLES = 40  # Number of rows to sample from the full dataset, 0 for all
 TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for testing)
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
-EVAL_TRAIN_POST_OPTIMIZATION = True  # Whether to print and evaluate socre on train set after optimization (Optional)
 
 import nest_asyncio, re
 nest_asyncio.apply()
@@ -293,8 +292,7 @@ def optimize_loop(
     evaluators,
     threshold=0.7,
     loops=5,
-    scorer="accuracy",
-    eval_train_post_optimization=EVAL_TRAIN_POST_OPTIMIZATION
+    scorer="accuracy"
 ):
     """
     scorer: one of "accuracy", "f1", "precision", "recall"
@@ -366,15 +364,17 @@ def optimize_loop(
                 feedback_columns=["correctness", "explanation", "rule_violations"]
             )
 
-            # Evaluate train set metrics for this run (only score)
-            train_evals_all = evaluate_output(train_set)[0]
-            train_evals = train_evals_all["correctness"]
-            y_true_train = ["correct"] * len(train_evals)
-            y_pred_train = train_evals
-            train_metric_value = compute_metric(y_true_train, y_pred_train, scorer=scorer)
-            train_metrics.append(train_metric_value)
-
-            print(f"✅ Train Pre Optimizer {scorer}: {train_metric_value}")
+            # Evaluate train set after optimization
+            train_outputs_post = generate_output(train_set, system_prompt)
+            train_set_post = train_set.copy()
+            train_set_post["output"] = train_outputs_post
+            train_evals_post_all = evaluate_output(train_set_post)[0]
+            train_evals_post = train_evals_post_all["correctness"]
+            y_true_train_post = ["correct"] * len(train_evals_post)
+            y_pred_train_post = train_evals_post
+            train_metric_post_value = compute_metric(y_true_train_post, y_pred_train_post, scorer=scorer)
+            train_metrics.append(train_metric_post_value)
+            print(f"✅ Train {scorer}: {train_metric_post_value}")
 
             system_prompt = optimizer.optimize(
                 train_set,
@@ -382,18 +382,6 @@ def optimize_loop(
                 feedback_columns=["correctness", "explanation", "rule_violations"],
                 context_size_k=128000
             )
-
-            # Optional: Evaluate train set after optimization
-            if eval_train_post_optimization:
-                train_outputs_post = generate_output(train_set, system_prompt)
-                train_set_post = train_set.copy()
-                train_set_post["output"] = train_outputs_post
-                train_evals_post_all = evaluate_output(train_set_post)[0]
-                train_evals_post = train_evals_post_all["correctness"]
-                y_true_train_post = ["correct"] * len(train_evals_post)
-                y_pred_train_post = train_evals_post
-                train_metric_post_value = compute_metric(y_true_train_post, y_pred_train_post, scorer=scorer)
-                print(f"✅ Train Post Optimizer {scorer}: {train_metric_post_value}")
 
             loops -= 1
             curr_loop += 1
@@ -410,7 +398,19 @@ def optimize_loop(
     prompts.append(system_prompt)
     raw_dfs.append(copy.deepcopy(test_set))
 
+    # Final train evaluation with optimized prompt
+    train_outputs_final = generate_output(train_set, system_prompt)
+    train_set_final = train_set.copy()
+    train_set_final["output"] = train_outputs_final
+    train_evals_final_all = evaluate_output(train_set_final)[0]
+    train_evals_final = train_evals_final_all["correctness"]
+    y_true_train_final = ["correct"] * len(train_evals_final)
+    y_pred_train_final = train_evals_final
+    train_metric_final_value = compute_metric(y_true_train_final, y_pred_train_final, scorer=scorer)
+    train_metrics.append(train_metric_final_value)
+
     print(f"✅ Final test {scorer}: {metric_value} ({sum(1 for item in test_evals if item == 'correct')}/{len(test_evals)} correct)")
+    print(f"✅ Final train {scorer}: {train_metric_final_value} ({sum(1 for item in train_evals_final if item == 'correct')}/{len(train_evals_final)} correct)")
     return {
         "train": train_metrics,
         "test": test_metrics,
