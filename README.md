@@ -69,8 +69,8 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 | Ruleset Size | Test Accuracy - 1 loop| Test Accuracy - 5 loops |
 |--------------|----------------|---------------|
 | 10 | 84% | 100% |
-| 50 | 66% | 100% |
-| 100 | 0% | 55% |
+| 50 | 66% | 82% |
+| 100 | 42% | 67% |
 
 ### Key Findings
 
