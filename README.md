@@ -66,13 +66,11 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 
 ### Table 1: Prompt Learning Performance
 
-| Ruleset Size | Train Accuracy | Test Accuracy | All Accuracy | Baseline Accuracy | Baseline with Ruleset |
-|--------------|----------------|---------------|--------------|-------------------|----------------------|
-| 100 | 2% | 1% | 1.10% | 0% | 5.80% |
-| 50 | 3% | 2.33% | 2.40% | 0% | 14.70% |
-| 25 | 42% | 40% | 40.20% | 0% | 41.00% |
-| 10 | 30% | 30% | 30.33% | 0% | 40.40% |
-| 5 | 63% | 69.22% | 68.60% | 0.40% | 69.60% |
+| Ruleset Size | Test Accuracy - 1 loop| Test Accuracy - 5 loops |
+|--------------|----------------|---------------|
+| 10 | 84% | 100% |
+| 50 | 66% | 82% |
+| 100 | 42% | 67% |
 
 ### Key Findings
 
@@ -84,15 +82,30 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 ## Repository Structure
 
 ```
-prompt-opt-sdk/
-├── research/
-│   ├── notebooks/           # Jupyter notebooks for experiments
-│   ├── experiments/         # Experimental configurations and results
-│   └── papers/             # Research papers and documentation
-├── src/                    # Core implementation (will be moved to separate package)
+Prompt-Learning/
 ├── data/                   # Datasets and evaluation data
-├── prompts/                # Prompt templates and examples
-└── docs/                   # Documentation and guides
+│   ├── queries.csv        # Main dataset
+│   └── README.md          # Data documentation
+├── prompts/               # Prompt templates for different rule counts
+│   ├── evaluator-prompt-10.txt
+│   ├── evaluator-prompt-50.txt
+│   ├── evaluator-prompt-100.txt
+│   ├── rule-checker-prompt-10.txt
+│   ├── rule-checker-prompt-50.txt
+│   ├── rule-checker-prompt-100.txt
+│   ├── metrics-prompt-10.txt
+│   ├── metrics-prompt-50.txt
+│   └── metrics-prompt-100.txt
+├── notebooks/             # Jupyter notebooks for experiments      
+│   └── prompt_learning_cookbook_AX.ipynb
+├── meta_prompt.py         # Core meta-prompt implementation
+├── meta_prompt_optimizer.py # Meta-prompt optimizer
+├── prompt_learning_run.py # Main experiment runner
+├── tiktoken_splitter.py   # Token counting utilities
+├── train.csv              # Training dataset
+├── test.csv               # Test dataset
+├── requirements.txt       # Python dependencies
+└── README.md             # This file
 ```
 
 ## Quick Start
@@ -136,6 +149,16 @@ optimized_prompt = optimizer.optimize(
 )
 ```
 
+### Running Experiments
+
+```python
+# Single experiment
+python prompt_learning_run.py
+
+# Multi-rule experiments (10, 50, 100 rules)
+# Edit RUN_MULTI_RULE_EXPERIMENTS = True in prompt_learning_run.py
+```
+
 ## Key Innovations
 
 ### 1. English Error Terms
@@ -175,59 +198,16 @@ optimized_prompt = optimizer.optimize(
 | **Compute Cost** | Front-loaded (search); negligible at inference | Minimal upfront, <1 extra call per optimization |
 | **Interpretability** | Final prompt readable, reasoning hidden in search logs | Full audit trail: every instruction edit in plain English |
 
-## Literature Review
-
-### Relevant Approaches
-
-- **Promptbreeder (DeepMind)**: Prompt edits but no English critiques
-- **OPRO – "LLMs as Optimizers"**: Prompt edits but no English critiques  
-- **PromptAgent**: Uses free-form critiques but doesn't embed them in final prompt
-- **StablePrompt**: RL updates instead of prompt edits
-- **Meta-Prompting: Task-Agnostic Scaffolding**: First use of metaprompt but no English critiques
-- **Critic-RM**: Self-generated critiques for reward modeling
-- **Self-Refine**: Iterative refinement with self-feedback
-
-## Limitations and Future Work
-
-### Current Limitations
-- Requires structured English feedback
-- Limited to specific prompt sections
-- May not generalize to all domains
-
-### Future Directions
-- Integration with MCTS-based search (like PromptAgent)
-- Multi-modal feedback support
-- Cross-domain generalization
-- Advanced instruction management
-
-## Citation
-
-If you use this research in your work, please cite:
-
-```bibtex
-@misc{prompt_learning_2024,
-  title={Exploring Prompt Learning: Using English Feedback to Optimize LLM Systems},
-  author={[Your Name]},
-  year={2024},
-  url={https://github.com/PriyanJindal/meta-prompt-optimization}
-}
-```
-
 ## Contributing
 
 This is a research repository. For contributions:
 
 1. Create a new branch for your experiment
-2. Document your methodology in `research/notebooks/`
-3. Update this README with findings
-4. Submit a pull request
-
-## License
-
-[Add your license here]
+2. Update this README with findings
+3. Submit a pull request
 
 ## Contact
 
-For questions about the research, contact: [Your Email]
+For questions about the research, contact: pjindal@arize.com
 
 
