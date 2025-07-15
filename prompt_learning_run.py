@@ -356,7 +356,7 @@ def optimize_loop(
 
         optimizer = MetaPromptOptimizer(
             prompt=system_prompt,
-            model_choice="gpt-4.1-2025-04-14",
+            model_choice="gpt-4o",
             openai_api_key=os.getenv("OPENAI_API_KEY")
         )
 
