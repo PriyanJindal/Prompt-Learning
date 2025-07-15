@@ -256,7 +256,7 @@ There are 3 steps to every loop of optimization.
 This process repeats until we see good results on the test set. In this case, we measure our results to be satisfactory when all outputs are deemed "correct" by the evaluate_output evaluator we defined above.
 """
 
-from meta_prompt_optimizer import MetaPromptOptimizer
+from arize_toolkit.extensions.prompt_optimizer import MetaPromptOptimizer
 
 num_rules = NUM_RULES  # Use config value from top of file
 
