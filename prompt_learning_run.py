@@ -17,7 +17,7 @@ In this cookbook, we demonstrate a use case of the Arize Prompt Learning SDK by 
 
 # CONFIG: Number of samples to use for the experiment. Adjust as needed.
 NUM_SAMPLES = 100  # Number of rows to sample from the full dataset, 0 for all
-TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for testing)
+TRAIN_SPLIT_FRACTION = 0.25  # Fraction of data to use for training (rest for testing)
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
 
 # EXPERIMENT CONFIGURATION
@@ -83,8 +83,7 @@ First, download the [dataset of queries](https://storage.googleapis.com/arize-as
 
 import pandas as pd
 
-dataset_1000 = pd.read_csv("https://storage.googleapis.com/arize-assets/dev-rel/prompt-learning/queries.csv")
-
+dataset_1000 = pd.read_csv("/Users/sriichavali/Desktop/Prompt-Learning/sri/wol_inputs.csv")
 
 dataset_50 = dataset_1000.sample(NUM_SAMPLES) if NUM_SAMPLES > 0 else dataset_1000
 
@@ -100,7 +99,9 @@ test_set.to_csv("test.csv", index=False)
 Initialize your system prompt. This is the original prompt that will be tested and optimized.
 """
 
-system_prompt = "You are an expert in JSON webpage creation. This is your task: {input}"
+#system_prompt = "You are an expert in JSON webpage creation. This is your task: {input}"
+#system_prompt = "You are an expert in solving boolean expressions. Return your answer **in JSON** with a single key `result` whose value is either \"True\" or \"False\". This is your task: {input}"
+system_prompt = "You are an expert in solving truthfulness puzzles. Return your answer **in JSON** with a single key `result` whose value is either \"Yes\" or \"No\". This is your task: {input}"
 
 """## Evaluator
 
@@ -149,19 +150,20 @@ def evaluate_output_parser(response: str, row_index: int) -> dict:
         "explanation": explanation
     }
 
-def rule_checker_parser(response: str, row_index: int) -> dict:
-    """Parser function for rule_checker evaluator"""
-    explanation = find_explanation(response)
+# def rule_checker_parser(response: str, row_index: int) -> dict:
+#     """Parser function for rule_checker evaluator"""
+#     explanation = find_explanation(response)
 
-    return {
-        "rule_violations": explanation
-    }
+#     return {
+#         "rule_violations": explanation
+#     }
 
-def evaluate_output(dataset, num_rules=NUM_RULES):
+#def evaluate_output(dataset, num_rules=NUM_RULES):
+def evaluate_output(dataset):
     """Evaluator that checks JSON web page correctness using llm_generate"""
 
     # Create the evaluation template
-    with open(f"prompts/evaluator-prompt-{num_rules}.txt", "r") as file:
+    with open("/Users/sriichavali/Desktop/Prompt-Learning/sri/evaluator-lies.txt", "r") as file:
         evaluation_template = file.read()
 
     # Create the model
@@ -191,38 +193,38 @@ def evaluate_output(dataset, num_rules=NUM_RULES):
 
     return dataset, ["correctness", "explanation"]
 
-def rule_checker(dataset, num_rules=NUM_RULES):
-    """Evaluator that checks which rules are broken using llm_generate"""
+# def rule_checker(dataset, num_rules=NUM_RULES):
+#     """Evaluator that checks which rules are broken using llm_generate"""
 
-    # Create the rule checking template
-    with open(f"prompts/rule-checker-prompt-{num_rules}.txt", "r") as file:
-        rule_check_template = file.read()
+#     # Create the rule checking template
+#     with open(f"prompts/rule-checker-prompt-{num_rules}.txt", "r") as file:
+#         rule_check_template = file.read()
 
-    # Create the model
-    eval_model = OpenAIModel(
-        model="gpt-4o",
-        model_kwargs={
-            "response_format": {"type": "json_object"},
-            "temperature": 0
-        }
-    )
+#     # Create the model
+#     eval_model = OpenAIModel(
+#         model="gpt-4o",
+#         model_kwargs={
+#             "response_format": {"type": "json_object"},
+#             "temperature": 0
+#         }
+#     )
 
-    # Generate rule checks using llm_generate
-    rule_check_results = llm_generate(
-        dataframe=dataset,
-        template=rule_check_template,
-        model=eval_model,
-        output_parser=rule_checker_parser,
-        concurrency=40,
-        verbose=True
-    )
+#     # Generate rule checks using llm_generate
+#     rule_check_results = llm_generate(
+#         dataframe=dataset,
+#         template=rule_check_template,
+#         model=eval_model,
+#         output_parser=rule_checker_parser,
+#         concurrency=40,
+#         verbose=True
+#     )
 
-    # Merge the results back into the original dataset
-    dataset = dataset.copy()
-    if "rule_violations" in rule_check_results.columns:
-        dataset["rule_violations"] = rule_check_results["rule_violations"]
+#     # Merge the results back into the original dataset
+#     dataset = dataset.copy()
+#     if "rule_violations" in rule_check_results.columns:
+#         dataset["rule_violations"] = rule_check_results["rule_violations"]
 
-    return dataset, ["rule_violations"]
+#     return dataset, ["rule_violations"]
 
 from phoenix.evals import llm_generate
 
@@ -258,7 +260,7 @@ This process repeats until we see good results on the test set. In this case, we
 
 from arize_toolkit.extensions.prompt_optimizer import MetaPromptOptimizer
 
-num_rules = NUM_RULES  # Use config value from top of file
+#num_rules = NUM_RULES  # Use config value from top of file
 
 from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_score
 
@@ -290,7 +292,7 @@ def optimize_loop(
     threshold=1,
     loops=5,
     scorer="accuracy",
-    num_rules=NUM_RULES
+    #num_rules=NUM_RULES
 ):
     """
     scorer: one of "accuracy", "f1", "precision", "recall"
@@ -320,7 +322,8 @@ def optimize_loop(
     print(f"📊 Initial evaluation:")
     test_set["output"] = generate_output(test_set, system_prompt)
     
-    test_evals_all = evaluate_output(test_set, num_rules)[0]
+    #test_evals_all = evaluate_output(test_set, num_rules)[0]
+    test_evals_all = evaluate_output(test_set)[0]
     test_evals = test_evals_all["correctness"]
     y_true = ["correct"] * len(test_evals)
     y_pred = test_evals
@@ -339,7 +342,7 @@ def optimize_loop(
             "test": test_metrics,
             "prompt": prompts,
             "raw": raw_dfs,
-            "num_rules": num_rules
+            #"num_rules": num_rules
         }
         return result
     
@@ -366,9 +369,9 @@ def optimize_loop(
         evaluators_with_rules = []
         for evaluator in evaluators:
             if evaluator.__name__ == 'evaluate_output':
-                evaluators_with_rules.append(lambda ds, nr=num_rules: evaluate_output(ds, nr))
-            elif evaluator.__name__ == 'rule_checker':
-                evaluators_with_rules.append(lambda ds, nr=num_rules: rule_checker(ds, nr))
+                evaluators_with_rules.append(lambda ds: evaluate_output(ds))
+            # elif evaluator.__name__ == 'rule_checker':
+            #     evaluators_with_rules.append(lambda ds, nr=num_rules: rule_checker(ds, nr))
             else:
                 evaluators_with_rules.append(evaluator)
         
@@ -389,7 +392,8 @@ def optimize_loop(
         train_outputs_post = generate_output(train_set, system_prompt)
         train_set_post = train_set.copy()
         train_set_post["output"] = train_outputs_post
-        train_evals_post_all = evaluate_output(train_set_post, num_rules)[0]
+        #train_evals_post_all = evaluate_output(train_set_post, num_rules)[0]
+        train_evals_post_all = evaluate_output(train_set_post)[0]
         train_evals_post = train_evals_post_all["correctness"]
         y_true_train_post = ["correct"] * len(train_evals_post)
         y_pred_train_post = train_evals_post
@@ -400,7 +404,8 @@ def optimize_loop(
         # 2. Test set evaluation with optimized prompt
         test_set["output"] = generate_output(test_set, system_prompt)
         
-        test_evals_all = evaluate_output(test_set, num_rules)[0]
+        #test_evals_all = evaluate_output(test_set, num_rules)[0]
+        test_evals_all = evaluate_output(test_set)[0]
         test_evals = test_evals_all["correctness"]
         y_true = ["correct"] * len(test_evals)
         y_pred = test_evals
@@ -420,7 +425,7 @@ def optimize_loop(
                 "test": test_metrics,
                 "prompt": prompts,
                 "raw": raw_dfs,
-                "num_rules": num_rules
+                #"num_rules": num_rules
             }
             return result
 
@@ -433,7 +438,7 @@ def optimize_loop(
         "test": test_metrics,
         "prompt": prompts,
         "raw": raw_dfs,
-        "num_rules": num_rules
+        #"num_rules": num_rules
     }
     return result
 
@@ -444,8 +449,9 @@ def validate_prompt_files(rule_counts):
     missing_files = []
     for num_rules in rule_counts:
         required_files = [
-            f"prompts/evaluator-prompt-{num_rules}.txt",
-            f"prompts/rule-checker-prompt-{num_rules}.txt"
+            "/Users/sriichavali/Desktop/Prompt-Learning/sri/evaluator-lies.txt",
+            #f"prompts/evaluator-prompt-{num_rules}.txt",
+            #f"prompts/rule-checker-prompt-{num_rules}.txt"
         ]
         
         for file_path in required_files:
@@ -493,7 +499,7 @@ def save_single_experiment_csv(results, filename):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Extract data
-    num_rules = results['num_rules']
+    #num_rules = results['num_rules']
     train_metrics = results.get('train', [])
     test_metrics = results['test']
     prompts = results['prompt']
@@ -503,7 +509,7 @@ def save_single_experiment_csv(results, filename):
     for i, (test_metric, prompt) in enumerate(zip(test_metrics, prompts)):
         row = {
             'iteration': i,
-            'num_rules': num_rules,
+            #'num_rules': num_rules,
             'test_accuracy': test_metric,
             'prompt': prompt
         }
@@ -520,7 +526,7 @@ def save_single_experiment_csv(results, filename):
     filename_with_timestamp = f"{filename}_{timestamp}.csv"
     df.to_csv(filename_with_timestamp, index=False)
     print(f"✅ Results saved to {filename_with_timestamp}")
-    print(f"   📊 {len(df)} iterations, {num_rules} rules")
+    #print(f"   📊 {len(df)} iterations, {num_rules} rules")
     print(f"   📈 Final accuracy: {df['test_accuracy'].iloc[-1]:.3f}")
 
 def save_multi_experiment_csv(results, base_filename="experiment_results"):
@@ -539,110 +545,125 @@ def save_multi_experiment_csv(results, base_filename="experiment_results"):
         csv_filename = f"{base_filename}_{experiment_name}_{timestamp}.csv"
         save_single_experiment_csv(experiment_results, csv_filename)
 
-
-
-def run_multi_rule_experiments(
-    train_set,
-    test_set,
-    system_prompt,
-    rule_counts=[10, 50, 100],
-    threshold=0.7,
-    loops=5,
-    scorer="accuracy"
-):
-    """
-    Run optimization experiments with different numbers of rules.
-    
-    Args:
-        train_set: Training dataset
-        test_set: Test dataset
-        system_prompt: Initial system prompt
-        rule_counts: List of rule counts to test
-        threshold: Threshold for stopping optimization
-        loops: Number of optimization loops
-        scorer: Metric to use for evaluation
-        
-    Returns:
-        dict: Results for each rule count experiment
-    """
-    all_results = {}
-    
-    print(f"🚀 Starting multi-rule experiments with rule counts: {rule_counts}")
-    print("=" * 80)
-    
-    # Validate that all required prompt files exist
-    validate_prompt_files(rule_counts)
-    
-    for num_rules in rule_counts:
-        print(f"\n📊 Running experiment with {num_rules} rules...")
-        print("-" * 60)
-        
-        # Update global NUM_RULES for this experiment
-        global NUM_RULES
-        NUM_RULES = num_rules
-        
-        # Run optimization for this rule count
-        evaluators = [evaluate_output, rule_checker]
-        results = optimize_loop(
-            train_set, test_set, system_prompt, evaluators,
-            threshold=threshold,
-            loops=loops,
-            scorer=scorer,
-            num_rules=num_rules
-        )
-        
-        all_results[f"{num_rules}_rules"] = results
-        
-        print(f"✅ Completed experiment with {num_rules} rules")
-        print(f"   Final test {scorer}: {results['test'][-1]:.3f}")
-    
-    print("\n" + "=" * 80)
-    print("🎉 All experiments completed!")
-    
-    # Print summary
-    print("\n📈 Summary of Results:")
-    for rule_count, results in all_results.items():
-        num_rules = results['num_rules']
-        final_test_score = results['test'][-1]
-        print(f"   {rule_count}: Test {scorer} = {final_test_score:.3f}")
-    
-    return all_results
-
-# Run experiments based on configuration
-if RUN_MULTI_RULE_EXPERIMENTS:
-    print("🚀 Running multi-rule experiments...")
-    multi_results = run_multi_rule_experiments(
-        train_set, test_set, system_prompt,
-        rule_counts=RULE_COUNTS_TO_TEST,
-        loops=NUM_OPTIMIZATION_LOOPS
-    )
-    
-    # Save results
-    save_experiment_results(multi_results, "multi_rule_experiments.json")
-    
-    # Save CSV results
-    save_multi_experiment_csv(multi_results, "multi_rule_experiments")
-    
-    print("\n📊 Multi-rule experiment results:")
-    print(multi_results)
-else:
-    print("🚀 Running single experiment...")
-    
-    # Validate that required prompt files exist
-    validate_prompt_files([NUM_RULES])
-    
-    evaluators = [evaluate_output, rule_checker]
+def simple_test(train_set, test_set, system_prompt, threshold=0.7, loops=5, scorer="accuracy"):
+    evaluators = [evaluate_output]
     results = optimize_loop(
         train_set, test_set, system_prompt, evaluators,
-        loops=NUM_OPTIMIZATION_LOOPS
+        threshold=threshold,
+        loops=loops,
+        scorer=scorer
     )
+    print("✅ Completed experiment")
+    print(f"   Final test {scorer}: {results['test'][-1]:.3f}")
+    print(f"   Final prompt: {results['prompt'][-1]}")
+    return results
+
+simple_test(train_set, test_set, system_prompt)
+
+# def run_multi_rule_experiments(
+#     train_set,
+#     test_set,
+#     system_prompt,
+#     rule_counts=[10, 50, 100],
+#     threshold=0.7,
+#     loops=5,
+#     scorer="accuracy"
+# ):
+#     """
+#     Run optimization experiments with different numbers of rules.
     
-    # Save results
-    save_experiment_results(results, "single_experiment_results.json")
+#     Args:
+#         train_set: Training dataset
+#         test_set: Test dataset
+#         system_prompt: Initial system prompt
+#         rule_counts: List of rule counts to test
+#         threshold: Threshold for stopping optimization
+#         loops: Number of optimization loops
+#         scorer: Metric to use for evaluation
+        
+#     Returns:
+#         dict: Results for each rule count experiment
+#     """
+#     all_results = {}
     
-    # Save CSV results
-    save_single_experiment_csv(results, "single_experiment")
+#     print(f"🚀 Starting multi-rule experiments with rule counts: {rule_counts}")
+#     print("=" * 80)
     
-    print("\n📊 Single experiment results:")
-    print(results)
+#     # Validate that all required prompt files exist
+#     validate_prompt_files(rule_counts)
+    
+#     for num_rules in rule_counts:
+#         print(f"\n📊 Running experiment with {num_rules} rules...")
+#         print("-" * 60)
+        
+#         # Update global NUM_RULES for this experiment
+#         global NUM_RULES
+#         NUM_RULES = num_rules
+        
+#         # Run optimization for this rule count
+#         #evaluators = [evaluate_output, rule_checker]
+#         evaluators = [evaluate_output]
+#         results = optimize_loop(
+#             train_set, test_set, system_prompt, evaluators,
+#             threshold=threshold,
+#             loops=loops,
+#             scorer=scorer,
+#             num_rules=num_rules
+#         )
+        
+#         all_results[f"{num_rules}_rules"] = results
+        
+#         print(f"✅ Completed experiment with {num_rules} rules")
+#         print(f"   Final test {scorer}: {results['test'][-1]:.3f}")
+    
+#     print("\n" + "=" * 80)
+#     print("🎉 All experiments completed!")
+    
+#     # Print summary
+#     print("\n📈 Summary of Results:")
+#     for rule_count, results in all_results.items():
+#         num_rules = results['num_rules']
+#         final_test_score = results['test'][-1]
+#         print(f"   {rule_count}: Test {scorer} = {final_test_score:.3f}")
+    
+#     return all_results
+
+# # Run experiments based on configuration
+# if RUN_MULTI_RULE_EXPERIMENTS:
+#     print("🚀 Running multi-rule experiments...")
+#     multi_results = run_multi_rule_experiments(
+#         train_set, test_set, system_prompt,
+#         rule_counts=RULE_COUNTS_TO_TEST,
+#         loops=NUM_OPTIMIZATION_LOOPS
+#     )
+    
+#     # Save results
+#     save_experiment_results(multi_results, "multi_rule_experiments.json")
+    
+#     # Save CSV results
+#     save_multi_experiment_csv(multi_results, "multi_rule_experiments")
+    
+#     print("\n📊 Multi-rule experiment results:")
+#     print(multi_results)
+# else:
+#     print("🚀 Running single experiment...")
+    
+#     # Validate that required prompt files exist
+#     validate_prompt_files([NUM_RULES])
+    
+#     #evaluators = [evaluate_output, rule_checker]
+#     evaluators = [evaluate_output]
+#     results = optimize_loop(
+#         train_set, test_set, system_prompt, evaluators,
+#         loops=NUM_OPTIMIZATION_LOOPS
+#     )
+    
+#     # Save results
+#     save_experiment_results(results, "single_experiment_results.json")
+    
+#     # Save CSV results
+#     save_single_experiment_csv(results, "single_experiment")
+    
+#     print("\n📊 Single experiment results:")
+#     print(results)
 

@@ -1,51 +1,76 @@
 Unnamed: 0,input
-793,"Design a simple login page with fields for username and password, and a 'Forgot Password?' link."
-364,"Build a contact page that includes an interactive map showing our location, a contact form with fields for name, email, and message, and a list of our business hours."
-605,"Design a webpage with a full-width video banner at the top. Below the video, add a section with three columns each containing an image and short text. At the bottom, include social media icons aligned to the center."
-341,"Create an educational course webpage featuring a course overview, instructor bio, curriculum breakdown, and a call-to-action button for enrolling."
-536,"Design an online flower shop homepage with featured bouquets, a wedding flowers gallery, customer testimonials, and a subscription form for floral tips."
-18,"Develop an online bookstore's homepage that highlights bestsellers and new arrivals in two separate sections, a newsletter signup form, and a cart icon in the top-right corner."
-194,"Design an event page for a music festival including performer lineups, festival map, and ticket purchasing options."
-794,"Create a membership page with membership levels, descriptions, and a comparison chart of benefits for each tier."
-49,"Set up a page for an online cooking class service called 'Culinary Creations'. Feature a collage of culinary photos, a sign-up form for a free trial class, and links to their social media pages."
-941,"Design a homepage for a university. Include the university's logo at the top, a navigation menu with 'About Us', 'Admissions', 'Departments', and 'Contact'. Add three featured news articles with headlines and summary texts. Finally, display a large footer with campus location and contact information."
-270,"Design an event page for a charity run, including the race details, a registration form, and a leaderboard. Add a visual countdown timer for the event date and a map showing the route."
-40,"Create a landing page for a new eBook titled 'Journey to the Future'. Include an eye-catching banner image, an introductory paragraph about the book, and a sign-up form to receive the first chapter via email."
-60,"Build an e-commerce product page that has a carousel of product images, a short description, price tag, customer reviews section, and a similar products suggestion vertically listed. Include an 'Add to Cart' button."
-111,"Develop a portfolio website featuring a full-screen background image, a grid layout of project thumbnails with titles and descriptions, and a sticky contact button that floats at the bottom right corner of the screen."
-801,"Create a personal blog page with a list of recent posts, an 'About Me' section, and a newsletter signup form."
-335,"Design a sophisticated e-commerce product page that displays a main product image, a gallery of additional images, product details, price, an 'Add to Cart' button, and user reviews with ratings."
-68,"Compose a website for a music artist's fans. The homepage should include a biography section for the artist, a discography with album titles and release dates, and a merchandise shop with items each listing a name, description, and price. There should be no live event details."
-118,"Design a charity donation page displaying multiple causes with images, a donate button for each, and a progress bar showing fundraising status."
-569,Create a home page where the main feature is a dynamic calendar showing events for the next 30 days. There should also be a subscription form to receive updates about upcoming events.
-609,"Design a product landing page with a hero section showing a product image and a brief description, followed by a section listing specifications in bullet points and a 'Buy Now' button."
-170,"Develop a technology news site that has dedicated sections for trending topics, in-depth analyses, and user-generated content ratings displayed as stars with animations."
-719,"Render a webpage with an interactive map showing three store locations pinpointed, each with a name, address, and opening hours. The sidebar should provide quick links to 'Home', 'About', 'Contact'."
-753,"Build a single-page website for a restaurant that includes a section for daily specials, an embedded map showing the location, and a 'Book a Table' button."
-704,"Create a home page with a carousel showcasing three top articles with titles and summaries. Below the carousel, provide a two-column section with recent blog posts on the left and trending topics on the right."
-647,"Compose a webpage for a tech blog post containing an introduction with the title and date, three subsections each with a heading and one paragraph, and an exit button redirecting to the home page."
-602,"Architect a personal blog homepage with a featured post section, a sidebar with categories, and an email subscription box."
-806,"Build a real estate listing page with a grid display of properties, filters for price and location, and a contact agent button."
-423,"Create a landing page for a charity event. The page must include an introductory video, a countdown timer to the event, and a section displaying testimonials from previous attendees. Additionally, there should be a donation link and a prominent call-to-action to register for the event."
-297,"Compose an auction page listing various items. Each item should have an image, name, starting bid price, and a countdown until the auction closes. There should be a 'Place Bid' button beside each item."
-318,"Build a movie review site homepage. Include a section for latest reviews, a list of top-rated movies, user login capability, and a search bar for finding movies."
-551,"Build an FAQ page with collapsible sections for each question and answer, a search bar at the top, and an additional resources section at the bottom."
-783,"Design a webpage that includes a blog post section with three posts, a search bar at the top, and a comment form at the bottom."
-395,"Construct a landing page for an upcoming event, with a countdown timer, event details, and a registration form at the bottom. The page should include an eye-catching background and a testimonial section."
-782,"Create a webpage with a main title, an image carousel with a sequence of three images each with captions, and a sidebar showing a list of quick links. The page should include social media share buttons at the footer."
-36,"Develop a web page for a conference event. It should start with a hero section with a background image and title of the event. Next, include a list of speakers (name, bio, and photo), and the event schedule as a timeline. Finish with a registration form requiring name, email, and choice of sessions."
-329,"Construct a webpage for a car dealership 'Drive Away' showcasing featured cars, customer testimonials, and a location map."
-738,"Build a restaurant menu webpage. The page should show the restaurant name, sections for appetizers, main courses, and desserts with descriptions and prices, and a reservation button."
-841,"Create a page with a navigation bar at the top containing links to Home, About, and Contact pages. Below that, add a section dedicated to user testimonials, and at the bottom, integrate a subscription form with a single email input."
-482,"Create a charity donation page with an impact statistics section, success stories, and a donation form."
-810,"Create a university course catalog page with course listings, filtering by department, and a registration link."
-675,"Create a webpage for a digital art gallery. It should have a horizontal scrolling feature for the gallery section, a prominent artist bio under each artwork, and a subscription form at the bottom for newsletter updates."
-488,"Construct a webpage for a webinar series on digital marketing. Include a countdown timer to the next session, a list of upcoming topics, and a section for frequently asked questions."
-138,"Generate a landing page for a new social media app. Showcase the app's core features in three columns, including icons and short descriptions. Below, add animator testimonials and their logos. End with a call-to-action button asking users to download the app."
-421,"Develop a webpage for a book launch event that includes an event schedule, speaker information with photos, an RSVP button, and a section for previous event highlights."
-571,Create a services page listing three different packages with detailed descriptions. Each package should have a 'Learn More' and 'Sign Up' button.
-19,"Create a webpage for a digital marketing agency with a service overview, client logos carousel, team introductions, and a 'Get in Touch' CTA button."
-872,"Create a landing page for a digital conference. The page should feature a schedule of events with times, speakers, and topics. Include registration button and a navigation bar with links to 'Home', 'About', 'Speakers', 'Schedule', and 'Register'."
-175,"Generate a website page that presents a personal blog with three recent posts, each with a title, date, and a 'Read More' link. At the bottom, include a section to subscribe to the newsletter."
-650,"Generate a webpage that displays a timeline of significant events, each with an image and a brief description, and a floating sidebar with a 'Subscribe' button."
-808,"Design a summer festival webpage with event schedules, performer line-up, and a map to festival grounds."
+221,Question: Antwan tells the truth. Audrie says Antwan tells the truth. Inga says Audrie lies. Shenna says Inga tells the truth. Christie says Shenna lies. Does Christie tell the truth?
+23,Question: Phoebe tells the truth. Christie says Phoebe tells the truth. Fletcher says Christie tells the truth. Amberly says Fletcher lies. Raymond says Amberly tells the truth. Does Raymond tell the truth?
+38,Question: Maybelle lies. Jamey says Maybelle tells the truth. Phoebe says Jamey lies. Willian says Phoebe lies. Shalonda says Willian lies. Does Shalonda tell the truth?
+213,Question: Teressa lies. Sal says Teressa tells the truth. Delbert says Sal tells the truth. Tamika says Delbert tells the truth. Gwenn says Tamika tells the truth. Does Gwenn tell the truth?
+80,Question: Christie tells the truth. Jamey says Christie tells the truth. Michael says Jamey lies. Rashida says Michael tells the truth. Teressa says Rashida tells the truth. Does Teressa tell the truth?
+86,Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+194,Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+138,Question: Helene tells the truth. Raymond says Helene lies. Andree says Raymond tells the truth. Michael says Andree tells the truth. Amberly says Michael tells the truth. Does Amberly tell the truth?
+179,Question: Shaunda tells the truth. Conception says Shaunda lies. Shenna says Conception lies. Delbert says Shenna lies. Jerry says Delbert tells the truth. Does Jerry tell the truth?
+131,Question: Christie tells the truth. Elanor says Christie lies. Jaymie says Elanor tells the truth. Jamey says Jaymie lies. Alexis says Jamey tells the truth. Does Alexis tell the truth?
+225,Question: Sherrie lies. Elanor says Sherrie tells the truth. Michael says Elanor tells the truth. Sima says Michael tells the truth. Shaunda says Sima lies. Does Shaunda tell the truth?
+162,Question: Willian tells the truth. Shalonda says Willian tells the truth. Helene says Shalonda tells the truth. Millicent says Helene lies. Andree says Millicent lies. Does Andree tell the truth?
+54,Question: Fletcher tells the truth. Ka says Fletcher tells the truth. Elanor says Ka lies. Vernell says Elanor lies. Delfina says Vernell tells the truth. Does Delfina tell the truth?
+115,Question: Yoland tells the truth. Michaela says Yoland tells the truth. Sima says Michaela tells the truth. Shaunda says Sima tells the truth. Osvaldo says Shaunda lies. Does Osvaldo tell the truth?
+78,Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+107,Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+166,Question: Gwenn tells the truth. Lorine says Gwenn lies. Antwan says Lorine tells the truth. Elanor says Antwan tells the truth. Delfina says Elanor tells the truth. Does Delfina tell the truth?
+99,Question: Jaymie lies. Christie says Jaymie tells the truth. Alejandro says Christie lies. Gwenn says Alejandro tells the truth. Sal says Gwenn lies. Does Sal tell the truth?
+9,Question: Rashida tells the truth. Jim says Rashida lies. Alejandro says Jim lies. Tamika says Alejandro tells the truth. Fidel says Tamika lies. Does Fidel tell the truth?
+42,Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+104,Question: Crista tells the truth. Shalonda says Crista lies. Millicent says Shalonda lies. Vernell says Millicent lies. Inga says Vernell tells the truth. Does Inga tell the truth?
+206,Question: Vernell lies. Conception says Vernell lies. Kandi says Conception lies. Michael says Kandi tells the truth. Osvaldo says Michael tells the truth. Does Osvaldo tell the truth?
+126,Question: Amberly lies. Shalonda says Amberly tells the truth. Helene says Shalonda tells the truth. Sima says Helene tells the truth. Christie says Sima tells the truth. Does Christie tell the truth?
+95,Question: Phoebe tells the truth. Helene says Phoebe lies. Sima says Helene lies. Alejandro says Sima tells the truth. Michaela says Alejandro lies. Does Michaela tell the truth?
+44,Question: Millicent lies. Alexis says Millicent lies. Inga says Alexis tells the truth. Christie says Inga lies. Gwenn says Christie lies. Does Gwenn tell the truth?
+55,Question: Kandi tells the truth. Alejandro says Kandi tells the truth. Millicent says Alejandro lies. Shalonda says Millicent lies. Conception says Shalonda lies. Does Conception tell the truth?
+248,Question: Fletcher tells the truth. Alexis says Fletcher lies. Jerry says Alexis lies. Elanor says Jerry tells the truth. Jim says Elanor lies. Does Jim tell the truth?
+36,Question: Fidel lies. Fletcher says Fidel tells the truth. Yoland says Fletcher lies. Raymond says Yoland lies. Leda says Raymond lies. Does Leda tell the truth?
+4,Question: Tamika lies. Raymond says Tamika tells the truth. Willian says Raymond tells the truth. Shaunda says Willian lies. Elanor says Shaunda tells the truth. Does Elanor tell the truth?
+83,Question: Teressa lies. Willian says Teressa lies. Jamey says Willian lies. Ryan says Jamey lies. Kandi says Ryan lies. Does Kandi tell the truth?
+48,Question: Audrie tells the truth. Yoland says Audrie lies. Shaunda says Yoland tells the truth. Raymond says Shaunda lies. Maybelle says Raymond lies. Does Maybelle tell the truth?
+19,Question: Fidel lies. Sal says Fidel tells the truth. Osvaldo says Sal lies. Alexis says Osvaldo lies. Millie says Alexis tells the truth. Does Millie tell the truth?
+155,Question: Delbert tells the truth. Gwenn says Delbert lies. Audrie says Gwenn lies. Christie says Audrie lies. Alexis says Christie lies. Does Alexis tell the truth?
+133,Question: Alejandro lies. Vina says Alejandro lies. Vernell says Vina tells the truth. Fidel says Vernell lies. Inga says Fidel tells the truth. Does Inga tell the truth?
+243,Question: Jerry lies. Kandi says Jerry lies. Fletcher says Kandi lies. Ryan says Fletcher lies. Delfina says Ryan lies. Does Delfina tell the truth?
+207,Question: Shaunda tells the truth. Delbert says Shaunda tells the truth. Bernita says Delbert lies. Yoland says Bernita tells the truth. Christie says Yoland tells the truth. Does Christie tell the truth?
+174,Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+223,Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+106,Question: Elanor tells the truth. Leda says Elanor lies. Osvaldo says Leda tells the truth. Jim says Osvaldo lies. Gwenn says Jim lies. Does Gwenn tell the truth?
+233,Question: Fidel tells the truth. Teressa says Fidel tells the truth. Willian says Teressa tells the truth. Conception says Willian tells the truth. Bernita says Conception lies. Does Bernita tell the truth?
+157,Question: Delfina tells the truth. Fidel says Delfina tells the truth. Helene says Fidel lies. Crista says Helene lies. Ka says Crista lies. Does Ka tell the truth?
+79,Question: Kristian tells the truth. Dallas says Kristian tells the truth. Osvaldo says Dallas lies. Millie says Osvaldo tells the truth. Vina says Millie tells the truth. Does Vina tell the truth?
+47,Question: Michaela lies. Millicent says Michaela lies. Delbert says Millicent lies. Bernita says Delbert lies. Teressa says Bernita tells the truth. Does Teressa tell the truth?
+139,Question: Willian tells the truth. Crista says Willian tells the truth. Vina says Crista lies. Fidel says Vina lies. Fletcher says Fidel lies. Does Fletcher tell the truth?
+76,Question: Conception tells the truth. Teressa says Conception lies. Sal says Teressa tells the truth. Fidel says Sal tells the truth. Shenna says Fidel lies. Does Shenna tell the truth?
+88,Question: Helene tells the truth. Lorine says Helene lies. Raymond says Lorine tells the truth. Ka says Raymond tells the truth. Christie says Ka tells the truth. Does Christie tell the truth?
+232,Question: Alexis tells the truth. Elanor says Alexis tells the truth. Sherrie says Elanor lies. Audrie says Sherrie tells the truth. Inga says Audrie tells the truth. Does Inga tell the truth?
+33,Question: Jerry lies. Helene says Jerry lies. Alexis says Helene tells the truth. Sherrie says Alexis tells the truth. Michael says Sherrie tells the truth. Does Michael tell the truth?
+210,Question: Andree tells the truth. Christie says Andree tells the truth. Fidel says Christie lies. Antwan says Fidel tells the truth. Alejandro says Antwan lies. Does Alejandro tell the truth?
+51,Question: Elanor tells the truth. Ka says Elanor lies. Delbert says Ka tells the truth. Michaela says Delbert lies. Sherrie says Michaela lies. Does Sherrie tell the truth?
+15,Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+177,Question: Millicent lies. Lorine says Millicent lies. Rashida says Lorine lies. Sima says Rashida lies. Phoebe says Sima tells the truth. Does Phoebe tell the truth?
+236,Question: Ka tells the truth. Inga says Ka lies. Bernita says Inga lies. Osvaldo says Bernita tells the truth. Michaela says Osvaldo lies. Does Michaela tell the truth?
+81,Question: Rashida lies. Ryan says Rashida tells the truth. Vernell says Ryan tells the truth. Shaunda says Vernell lies. Amberly says Shaunda lies. Does Amberly tell the truth?
+143,Question: Shalonda lies. Crista says Shalonda tells the truth. Yoland says Crista tells the truth. Ka says Yoland tells the truth. Michaela says Ka lies. Does Michaela tell the truth?
+218,Question: Sal lies. Kristian says Sal lies. Helene says Kristian lies. Inga says Helene tells the truth. Michael says Inga tells the truth. Does Michael tell the truth?
+74,Question: Osvaldo tells the truth. Andree says Osvaldo tells the truth. Willian says Andree lies. Vina says Willian tells the truth. Jaymie says Vina tells the truth. Does Jaymie tell the truth?
+98,Question: Millicent tells the truth. Alexis says Millicent lies. Jaymie says Alexis lies. Willian says Jaymie tells the truth. Leda says Willian lies. Does Leda tell the truth?
+128,Question: Helene tells the truth. Teressa says Helene tells the truth. Jamey says Teressa lies. Alexis says Jamey lies. Osvaldo says Alexis tells the truth. Does Osvaldo tell the truth?
+219,Question: Maybelle lies. Crista says Maybelle tells the truth. Bernita says Crista lies. Kandi says Bernita tells the truth. Delbert says Kandi tells the truth. Does Delbert tell the truth?
+73,Question: Jamey tells the truth. Raymond says Jamey lies. Audrie says Raymond lies. Michaela says Audrie lies. Rashida says Michaela lies. Does Rashida tell the truth?
+238,Question: Millie lies. Andree says Millie lies. Michaela says Andree lies. Leda says Michaela tells the truth. Shenna says Leda lies. Does Shenna tell the truth?
+29,Question: Shalonda lies. Jaymie says Shalonda tells the truth. Raymond says Jaymie lies. Audrie says Raymond lies. Sherrie says Audrie lies. Does Sherrie tell the truth?
+134,Question: Millicent tells the truth. Willian says Millicent lies. Crista says Willian lies. Teressa says Crista tells the truth. Rashida says Teressa tells the truth. Does Rashida tell the truth?
+149,Question: Teressa tells the truth. Lorine says Teressa lies. Antwan says Lorine tells the truth. Fidel says Antwan tells the truth. Phoebe says Fidel lies. Does Phoebe tell the truth?
+164,Question: Vernell tells the truth. Rashida says Vernell lies. Christie says Rashida tells the truth. Sherrie says Christie tells the truth. Jim says Sherrie lies. Does Jim tell the truth?
+136,Question: Ka lies. Lorine says Ka tells the truth. Sal says Lorine lies. Amberly says Sal lies. Conception says Amberly lies. Does Conception tell the truth?
+21,Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+220,Question: Ka lies. Rashida says Ka tells the truth. Sherrie says Rashida tells the truth. Tamika says Sherrie tells the truth. Elanor says Tamika tells the truth. Does Elanor tell the truth?
+71,Question: Kandi tells the truth. Crista says Kandi lies. Ryan says Crista tells the truth. Gwenn says Ryan tells the truth. Delfina says Gwenn tells the truth. Does Delfina tell the truth?
+84,Question: Audrie lies. Jaymie says Audrie tells the truth. Phoebe says Jaymie lies. Conception says Phoebe tells the truth. Michael says Conception lies. Does Michael tell the truth?
+59,Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+92,Question: Jim tells the truth. Tamika says Jim tells the truth. Helene says Tamika tells the truth. Jaymie says Helene tells the truth. Conception says Jaymie tells the truth. Does Conception tell the truth?
+145,Question: Bernita tells the truth. Ka says Bernita lies. Yoland says Ka lies. Gwenn says Yoland lies. Fidel says Gwenn lies. Does Fidel tell the truth?
+186,Question: Rashida lies. Osvaldo says Rashida tells the truth. Sherrie says Osvaldo tells the truth. Gwenn says Sherrie tells the truth. Jerry says Gwenn lies. Does Jerry tell the truth?

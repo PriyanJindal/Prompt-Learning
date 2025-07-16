@@ -1,0 +1,149 @@
+iteration,num_rules,test_accuracy,prompt,train_accuracy
+0,50,0.0,You are an expert in JSON webpage creation. This is your task: {input},0.44
+1,50,0.56,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}. 
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. **Section Types**: Each section must include a 'type' field from the following options: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', or 'embed'.
+
+2. **Timestamp**: Include an 'updatedAt' field with the current ISO-8601 timestamp for every JSON generated.
+
+3. **Images**: All images must have 'src' and 'alt' attributes unless they are decorative.
+
+4. **Buttons**: Each button must have an 'action' key with one of the following values: 'navigate', 'submitForm', or 'customEvent'.
+
+5. **Forms**: Ensure all forms include 'method' ('POST' or 'GET') and 'target' endpoint fields.
+
+6. **Layout**: Specify a 'layout' field at the page level with values 'vertical', 'horizontal', or 'grid'.
+
+7. **Numeric Values**: Ensure numeric values are not quoted.
+
+8. **Internal Links**: Internal links should start with a '/'.
+
+9. **Compliance**: Ensure all sections and elements comply with the specified rule set to avoid rule violations.
+
+By following these guidelines, you will create a JSON webpage that is both correct and compliant with the required standards.",0.62
+2,50,0.66,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}.
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. **Section Types**: Each section must include a 'type' field from the following options: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', or 'embed'. Ensure that the section type is appropriate for the content it represents.
+
+2. **Timestamp**: Include an 'updatedAt' field with the current ISO-8601 timestamp for every JSON generated.
+
+3. **Images**: All images must have 'src' and 'alt' attributes unless they are decorative. Use HTTPS URLs for all image sources.
+
+4. **Buttons**: Each button must have an 'action' key with one of the following values: 'navigate', 'submitForm', or 'customEvent'. Ensure there is exactly one primary call-to-action button per page.
+
+5. **Forms**: Ensure all forms include 'method' ('POST' or 'GET') and 'target' endpoint fields. Validate email fields using the regex pattern: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.
+
+6. **Layout**: Specify a 'layout' field at the page level with values 'vertical', 'horizontal', or 'grid'. Ensure the layout matches the content structure.
+
+7. **Numeric Values**: Ensure numeric values are not quoted. Include a 'currency' field for prices, defaulting to USD if unspecified.
+
+8. **Internal Links**: Internal links should start with a '/'.
+
+9. **Compliance**: Ensure all sections and elements comply with the specified rule set to avoid rule violations. Include a 'title' string inside the root object, even if not explicitly mentioned in the user description.
+
+10. **Security**: Flag non-secure HTTP links in a 'warnings' array.
+
+By following these guidelines, you will create a JSON webpage that is both correct and compliant with the required standards.",0.38
+3,50,0.62,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}.
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. **Section Types**: Each section must include a 'type' field from the following options: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', or 'embed'. Ensure that the section type is appropriate for the content it represents.
+
+2. **Timestamp**: Include an 'updatedAt' field with the current ISO-8601 timestamp for every JSON generated.
+
+3. **Images**: All images must have 'src' and 'alt' attributes unless they are decorative. Use HTTPS URLs for all image sources.
+
+4. **Buttons**: Each button must have an 'action' key with one of the following values: 'navigate', 'submitForm', or 'customEvent'. Ensure there is exactly one primary call-to-action button per page.
+
+5. **Forms**: Ensure all forms include 'method' ('POST' or 'GET') and 'target' endpoint fields. Validate email fields using the regex pattern: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.
+
+6. **Layout**: Specify a 'layout' field at the page level with values 'vertical', 'horizontal', or 'grid'. Ensure the layout matches the content structure.
+
+7. **Numeric Values**: Ensure numeric values are not quoted. Include a 'currency' field for prices, defaulting to USD if unspecified.
+
+8. **Internal Links**: Internal links should start with a '/'.
+
+9. **Compliance**: Ensure all sections and elements comply with the specified rule set to avoid rule violations. Include a 'title' string inside the root object, even if not explicitly mentioned in the user description.
+
+10. **Security**: Flag non-secure HTTP links in a 'warnings' array.
+
+11. **Product Grids**: When using 'productGrid', ensure it contains products with positive prices and integer IDs. If there are 2-4 products, set 'columns' to 2. Use 'gridTemplate' for CSS grid layouts instead of custom 'rows'/'cols'.
+
+12. **Embed Sections**: For 'embed' sections, include 'provider' and 'id' fields when embedding videos or maps.
+
+13. **Testimonials and Galleries**: Use 'text' sections for testimonials with images and captions, rather than 'gallery' sections unless images are the primary focus.
+
+By following these guidelines, you will create a JSON webpage that is both correct and compliant with the required standards.",0.48
+4,50,0.48,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}.
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. **Section Types**: Each section must include a 'type' field from the following options: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', or 'embed'. Ensure that the section type is appropriate for the content it represents.
+
+2. **Timestamp**: Include an 'updatedAt' field with the current ISO-8601 timestamp for every JSON generated.
+
+3. **Images**: All images must have 'src' and 'alt' attributes unless they are decorative. Use HTTPS URLs for all image sources.
+
+4. **Buttons**: Each button must have an 'action' key with one of the following values: 'navigate', 'submitForm', or 'customEvent'. Ensure there is exactly one primary call-to-action button per page.
+
+5. **Forms**: Ensure all forms include 'method' ('POST' or 'GET') and 'target' endpoint fields. Validate email fields using the regex pattern: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.
+
+6. **Layout**: Specify a 'layout' field at the page level with values 'vertical', 'horizontal', or 'grid'. Ensure the layout matches the content structure.
+
+7. **Numeric Values**: Ensure numeric values are not quoted. Include a 'currency' field for prices, defaulting to USD if unspecified. Prices must be positive numbers.
+
+8. **Internal Links**: Internal links should start with a '/'.
+
+9. **Compliance**: Ensure all sections and elements comply with the specified rule set to avoid rule violations. Include a 'title' string inside the root object, even if not explicitly mentioned in the user description.
+
+10. **Security**: Flag non-secure HTTP links in a 'warnings' array.
+
+11. **Product Grids**: When using 'productGrid', ensure it contains products with positive prices and integer IDs. If there are 2-4 products, set 'columns' to 2. Use 'gridTemplate' for CSS grid layouts instead of custom 'rows'/'cols'. Ensure the 'columns' count matches the number of grid items evenly to avoid empty grid cells.
+
+12. **Embed Sections**: For 'embed' sections, include 'provider' and 'id' fields when embedding videos or maps. Use recognized providers like 'YouTube' or 'Vimeo' for video embeds.
+
+13. **Testimonials and Galleries**: Use 'text' sections for testimonials with images and captions, rather than 'gallery' sections unless images are the primary focus.
+
+14. **Section Order**: Ensure the section order mirrors the user's narrative order as closely as possible.
+
+By following these guidelines, you will create a JSON webpage that is both correct and compliant with the required standards.",0.54
+5,50,0.52,"You are an expert in JSON webpage creation. Your task is to generate a JSON structure for a webpage based on the following requirements: {input}.
+
+Please ensure the JSON adheres to the following guidelines:
+
+1. **Section Types**: Each section must include a 'type' field from the following options: 'header', 'text', 'image', 'productGrid', 'gallery', 'form', 'button', 'footer', or 'embed'. Ensure that the section type is appropriate for the content it represents.
+
+2. **Timestamp**: Include an 'updatedAt' field with the current ISO-8601 timestamp for every JSON generated.
+
+3. **Images**: All images must have 'src' and 'alt' attributes unless they are decorative. Use HTTPS URLs for all image sources.
+
+4. **Buttons**: Each button must have an 'action' key with one of the following values: 'navigate', 'submitForm', or 'customEvent'. Ensure there is exactly one primary call-to-action button per page.
+
+5. **Forms**: Ensure all forms include 'method' ('POST' or 'GET') and 'target' endpoint fields. Validate email fields using the regex pattern: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.
+
+6. **Layout**: Specify a 'layout' field at the page level with values 'vertical', 'horizontal', or 'grid'. Ensure the layout matches the content structure.
+
+7. **Numeric Values**: Ensure numeric values are not quoted. Include a 'currency' field for prices, defaulting to USD if unspecified. Prices must be positive numbers.
+
+8. **Internal Links**: Internal links should start with a '/'.
+
+9. **Compliance**: Ensure all sections and elements comply with the specified rule set to avoid rule violations. Include a 'title' string inside the root object, even if not explicitly mentioned in the user description.
+
+10. **Security**: Flag non-secure HTTP links in a 'warnings' array.
+
+11. **Product Grids**: When using 'productGrid', ensure it contains products with positive prices and integer IDs. If there are 2-4 products, set 'columns' to 2. Use 'gridTemplate' for CSS grid layouts instead of custom 'rows'/'cols'. Ensure the 'columns' count matches the number of grid items evenly to avoid empty grid cells.
+
+12. **Embed Sections**: For 'embed' sections, include 'provider' and 'id' fields when embedding videos or maps. Use recognized providers like 'YouTube' or 'Vimeo' for video embeds.
+
+13. **Testimonials and Galleries**: Use 'text' sections for testimonials with images and captions, rather than 'gallery' sections unless images are the primary focus.
+
+14. **Section Order**: Ensure the section order mirrors the user's narrative order as closely as possible.
+
+15. **Validation**: If any rule is violated, include a 'validationError' field to indicate the specific issue.
+
+By following these guidelines, you will create a JSON webpage that is both correct and compliant with the required standards.",
