@@ -33,7 +33,7 @@ NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator
 # EXPERIMENT CONFIGURATION
 RUN_MULTI_RULE_EXPERIMENTS = False  # Set to True to run experiments with multiple rule counts
 RULE_COUNTS_TO_TEST = [10, 50, 100]  # Rule counts to test in multi-rule experiments
-NUM_OPTIMIZATION_LOOPS = 5  # Number of optimization loops per experiment
+NUM_OPTIMIZATION_LOOPS = 3  # Number of optimization loops per experiment
 
 # USAGE EXAMPLES:
 # 1. Single experiment with 50 rules (default):
@@ -290,9 +290,11 @@ def optimize_loop(
     if initial_metric_value >= threshold:
         print(f"🎉 Initial prompt already meets threshold!")
         result = {
+            "initial metric": initial_metric_value,
             "train": train_metrics,
             "test": test_metrics,
             "prompt": prompts,
+            "file": eval_template,
             "raw": raw_dfs
         }
         return result
@@ -372,6 +374,7 @@ def optimize_loop(
                 "train": train_metrics,
                 "test": test_metrics,
                 "prompt": prompts,
+                "file": eval_template,
                 "raw": raw_dfs
             }
             return result
@@ -490,7 +493,7 @@ def save_multi_experiment_csv(results, base_filename="experiment_results"):
         csv_filename = f"{base_filename}_{experiment_name}_{timestamp}.csv"
         save_single_experiment_csv(experiment_results, csv_filename)
 
-def simple_test(train_set, test_set, system_prompt, eval_template, results_df, threshold=0.7, loops=5, scorer="accuracy"):
+def simple_test(train_set, test_set, system_prompt, eval_template, results_df, threshold=1, loops=3, scorer="accuracy"):
     evaluators = [evaluate_output]
     results = optimize_loop(
         train_set, test_set, system_prompt, eval_template, evaluators,
@@ -503,10 +506,13 @@ def simple_test(train_set, test_set, system_prompt, eval_template, results_df, t
     print(f"   Final test {scorer}: {results['test'][-1]:.3f}")
     print(f"   Final prompt: {results['prompt'][-1]}")
     results_df = pd.concat([results_df, pd.DataFrame({k: [v] for k, v in results.items()})], ignore_index=True)
-    return results
+    return results, results_df
 
 wol_prompt = "You are an expert in solving truthfulness puzzles. Return your answer **in JSON** with a single key `result` whose value is either \"Yes\" or \"No\". This is your task: {input}"
 bool_prompt = "You are an expert in solving boolean expressions. Return your answer **in JSON** with a single key `result` whose value is either \"True\" or \"False\". This is your task: {input}"
+word_sorting_prompt = "You are an expert in sorting words alphabetically. Return your answer **in JSON** with a single key `result` whose value is the alphabetically sorted list of words separated by spaces. This is your task: {input}"
+sports_prompt = "You are an expert in understanding sports. Return your answer **in JSON** with a single key `result` whose value is either \"Yes\" or \"No\". This is your task: {input}"
+object_prompt = "You are an expert in counting objects. Return your answer **in JSON** with a single key `result` whose value is the number of objects in the input. This is your task: {input}"
 
 columns = ["initial metric", "train", "test", "prompt", "file", "raw"]
 result_df = pd.DataFrame(columns=columns)
@@ -514,9 +520,26 @@ result_df = pd.DataFrame(columns=columns)
 dataset_50, train_set, test_set = data_prep("wol_inputs")
 system_prompt = wol_prompt
 eval_template = "evaluator-lies"
-simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
 
 dataset_50, train_set, test_set = data_prep("boolean_inputs")
 system_prompt = bool_prompt
 eval_template = "evaluator-bool"
-simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+
+dataset_50, train_set, test_set = data_prep("word_sorting_inputs")
+system_prompt = word_sorting_prompt
+eval_template = "evaluator-wordsort"
+results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+
+dataset_50, train_set, test_set = data_prep("sports_inputs")
+system_prompt = sports_prompt
+eval_template = "evaluator-sports"
+results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+
+dataset_50, train_set, test_set = data_prep("object_inputs")
+system_prompt = object_prompt
+eval_template = "evaluator-object"
+results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+
+result_df.to_csv("results.csv")

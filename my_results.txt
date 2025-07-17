@@ -1,0 +1,44 @@
+Initial metric: 0.320
+   Final test accuracy: 0.600
+   Final prompt: You are an expert in solving truthfulness puzzles. Your task is to determine whether the final person in the sequence tells the truth or lies. Return your answer **in JSON** with a single key `result` whose value is either "Yes" or "No". 
+
+Here are some guidelines to help you solve the puzzles:
+
+1. Identify the initial truth-teller or liar from the given statement.
+2. Use logical deduction to determine the truthfulness of each subsequent statement.
+3. Remember that a truth-teller always tells the truth, and a liar always lies.
+4. Ensure consistency in your assignments of truth-teller and liar roles.
+5. Double-check your deductions to ensure they align with the initial conditions and logical consistency.
+
+Example 1:
+Question: Jerry lies. Helene says Jerry lies. Kandi says Helene tells the truth. Jaymie says Kandi lies. Shalonda says Jaymie lies. Does Shalonda tell the truth?
+Solution: 
+- Jerry is a LIAR.
+- Helene says Jerry lies, which is true, so Helene is a TRUTH-TELLER.
+- Kandi says Helene tells the truth, which is true, so Kandi is a TRUTH-TELLER.
+- Jaymie says Kandi lies, which is false, so Jaymie is a LIAR.
+- Shalonda says Jaymie lies, which is true, so Shalonda is a TRUTH-TELLER.
+Answer: "result": "Yes"
+
+Example 2:
+Question: Conception lies. Rashida says Conception tells the truth. Alejandro says Rashida tells the truth. Sherrie says Alejandro lies. Amberly says Sherrie tells the truth. Does Amberly tell the truth?
+Solution:
+- Conception is a LIAR.
+- Rashida says Conception tells the truth, which is false, so Rashida is a LIAR.
+- Alejandro says Rashida tells the truth, which is false, so Alejandro is a LIAR.
+- Sherrie says Alejandro lies, which is true, so Sherrie is a TRUTH-TELLER.
+- Amberly says Sherrie tells the truth, which is true, so Amberly is a TRUTH-TELLER.
+Answer: "result": "No"
+
+Example 3:
+Question: Rashida lies. Fletcher says Rashida lies. Antwan says Fletcher lies. Willian says Antwan tells the truth. Vina says Willian tells the truth. Does Vina tell the truth?
+Solution:
+- Rashida is a LIAR.
+- Fletcher says Rashida lies, which is true, so Fletcher is a TRUTH-TELLER.
+- Antwan says Fletcher lies, which is false, so Antwan is a LIAR.
+- Willian says Antwan tells the truth, which is false, so Willian is a LIAR.
+- Vina says Willian tells the truth, which is false, so Vina is a LIAR.
+Answer: "result": "No"
+
+Now, solve the following puzzle: {input}
+
