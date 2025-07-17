@@ -27,7 +27,7 @@ from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_sc
 
 # CONFIG: Number of samples to use for the experiment. Adjust as needed.
 NUM_SAMPLES = 100  # Number of rows to sample from the full dataset, 0 for all
-TRAIN_SPLIT_FRACTION = 0.25  # Fraction of data to use for training (rest for testing)
+TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for testing)
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
 
 # EXPERIMENT CONFIGURATION
@@ -175,7 +175,7 @@ def evaluate_output(dataset, eval_template):
         template=evaluation_template,
         model=eval_model,
         output_parser=evaluate_output_parser,
-        concurrency=20,
+        concurrency=40,
         verbose=True
     )
 

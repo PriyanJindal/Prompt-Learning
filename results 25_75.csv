@@ -1,0 +1,266 @@
+,initial metric,train,test,prompt,file,raw
+0,0.32,"[0.44, 0.56, 0.6]","[0.32, 0.56, 0.5333333333333333, 0.6]","['You are an expert in solving truthfulness puzzles. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". This is your task: {input}', 'You are an expert in solving truthfulness puzzles. Your task is to determine whether the final person in the sequence tells the truth or lies. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nHere are some guidelines to help you solve the puzzles:\n\n1. Identify the initial truth-teller or liar from the given statement.\n2. Use logical deduction to determine the truthfulness of each subsequent statement.\n3. Remember that a truth-teller always tells the truth, and a liar always lies.\n4. Ensure consistency in your assignments of truth-teller and liar roles.\n\nExample 1:\nQuestion: Jerry lies. Helene says Jerry lies. Kandi says Helene tells the truth. Jaymie says Kandi lies. Shalonda says Jaymie lies. Does Shalonda tell the truth?\nSolution: \n- Jerry is a LIAR.\n- Helene says Jerry lies, which is true, so Helene is a TRUTH-TELLER.\n- Kandi says Helene tells the truth, which is true, so Kandi is a TRUTH-TELLER.\n- Jaymie says Kandi lies, which is false, so Jaymie is a LIAR.\n- Shalonda says Jaymie lies, which is true, so Shalonda is a TRUTH-TELLER.\nAnswer: ""result"": ""Yes""\n\nExample 2:\nQuestion: Conception lies. Rashida says Conception tells the truth. Alejandro says Rashida tells the truth. Sherrie says Alejandro lies. Amberly says Sherrie tells the truth. Does Amberly tell the truth?\nSolution:\n- Conception is a LIAR.\n- Rashida says Conception tells the truth, which is false, so Rashida is a LIAR.\n- Alejandro says Rashida tells the truth, which is false, so Alejandro is a LIAR.\n- Sherrie says Alejandro lies, which is true, so Sherrie is a TRUTH-TELLER.\n- Amberly says Sherrie tells the truth, which is true, so Amberly is a TRUTH-TELLER.\nAnswer: ""result"": ""No""\n\nNow, solve the following puzzle: {input}', 'You are an expert in solving truthfulness puzzles. Your task is to determine whether the final person in the sequence tells the truth or lies. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nHere are some guidelines to help you solve the puzzles:\n\n1. Identify the initial truth-teller or liar from the given statement.\n2. Use logical deduction to determine the truthfulness of each subsequent statement.\n3. Remember that a truth-teller always tells the truth, and a liar always lies.\n4. Ensure consistency in your assignments of truth-teller and liar roles.\n5. Double-check your deductions to ensure they align with the initial conditions and logical consistency.\n\nExample 1:\nQuestion: Jerry lies. Helene says Jerry lies. Kandi says Helene tells the truth. Jaymie says Kandi lies. Shalonda says Jaymie lies. Does Shalonda tell the truth?\nSolution: \n- Jerry is a LIAR.\n- Helene says Jerry lies, which is true, so Helene is a TRUTH-TELLER.\n- Kandi says Helene tells the truth, which is true, so Kandi is a TRUTH-TELLER.\n- Jaymie says Kandi lies, which is false, so Jaymie is a LIAR.\n- Shalonda says Jaymie lies, which is true, so Shalonda is a TRUTH-TELLER.\nAnswer: ""result"": ""Yes""\n\nExample 2:\nQuestion: Conception lies. Rashida says Conception tells the truth. Alejandro says Rashida tells the truth. Sherrie says Alejandro lies. Amberly says Sherrie tells the truth. Does Amberly tell the truth?\nSolution:\n- Conception is a LIAR.\n- Rashida says Conception tells the truth, which is false, so Rashida is a LIAR.\n- Alejandro says Rashida tells the truth, which is false, so Alejandro is a LIAR.\n- Sherrie says Alejandro lies, which is true, so Sherrie is a TRUTH-TELLER.\n- Amberly says Sherrie tells the truth, which is true, so Amberly is a TRUTH-TELLER.\nAnswer: ""result"": ""No""\n\nExample 3:\nQuestion: Rashida lies. Fletcher says Rashida lies. Antwan says Fletcher lies. Willian says Antwan tells the truth. Vina says Willian tells the truth. Does Vina tell the truth?\nSolution:\n- Rashida is a LIAR.\n- Fletcher says Rashida lies, which is true, so Fletcher is a TRUTH-TELLER.\n- Antwan says Fletcher lies, which is false, so Antwan is a LIAR.\n- Willian says Antwan tells the truth, which is false, so Willian is a LIAR.\n- Vina says Willian tells the truth, which is false, so Vina is a LIAR.\nAnswer: ""result"": ""No""\n\nNow, solve the following puzzle: {input}', 'You are an expert in solving truthfulness puzzles. Your task is to determine whether the final person in the sequence tells the truth or lies. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nHere are some guidelines to help you solve the puzzles:\n\n1. Identify the initial truth-teller or liar from the given statement.\n2. Use logical deduction to determine the truthfulness of each subsequent statement.\n3. Remember that a truth-teller always tells the truth, and a liar always lies.\n4. Ensure consistency in your assignments of truth-teller and liar roles.\n5. Double-check your deductions to ensure they align with the initial conditions and logical consistency.\n\nExample 1:\nQuestion: Jerry lies. Helene says Jerry lies. Kandi says Helene tells the truth. Jaymie says Kandi lies. Shalonda says Jaymie lies. Does Shalonda tell the truth?\nSolution: \n- Jerry is a LIAR.\n- Helene says Jerry lies, which is true, so Helene is a TRUTH-TELLER.\n- Kandi says Helene tells the truth, which is true, so Kandi is a TRUTH-TELLER.\n- Jaymie says Kandi lies, which is false, so Jaymie is a LIAR.\n- Shalonda says Jaymie lies, which is true, so Shalonda is a TRUTH-TELLER.\nAnswer: ""result"": ""Yes""\n\nExample 2:\nQuestion: Conception lies. Rashida says Conception tells the truth. Alejandro says Rashida tells the truth. Sherrie says Alejandro lies. Amberly says Sherrie tells the truth. Does Amberly tell the truth?\nSolution:\n- Conception is a LIAR.\n- Rashida says Conception tells the truth, which is false, so Rashida is a LIAR.\n- Alejandro says Rashida tells the truth, which is false, so Alejandro is a LIAR.\n- Sherrie says Alejandro lies, which is true, so Sherrie is a TRUTH-TELLER.\n- Amberly says Sherrie tells the truth, which is true, so Amberly is a TRUTH-TELLER.\nAnswer: ""result"": ""No""\n\nExample 3:\nQuestion: Rashida lies. Fletcher says Rashida lies. Antwan says Fletcher lies. Willian says Antwan tells the truth. Vina says Willian tells the truth. Does Vina tell the truth?\nSolution:\n- Rashida is a LIAR.\n- Fletcher says Rashida lies, which is true, so Fletcher is a TRUTH-TELLER.\n- Antwan says Fletcher lies, which is false, so Antwan is a LIAR.\n- Willian says Antwan tells the truth, which is false, so Willian is a LIAR.\n- Vina says Willian tells the truth, which is false, so Vina is a LIAR.\nAnswer: ""result"": ""No""\n\nNow, solve the following puzzle: {input}']",evaluator-lies,"[     Unnamed: 0                                              input                   output
+230         230  Question: Jamey lies. Sal says Jamey tells the...  {\n  ""result"": ""Yes""\n}
+222         222  Question: Teressa lies. Michael says Teressa t...        {""result"": ""Yes""}
+176         176  Question: Vernell tells the truth. Fidel says ...  {\n  ""result"": ""Yes""\n}
+88           88  Question: Helene tells the truth. Lorine says ...   {\n  ""result"": ""No""\n}
+95           95  Question: Phoebe tells the truth. Helene says ...  {\n  ""result"": ""Yes""\n}
+..          ...                                                ...                      ...
+87           87  Question: Teressa lies. Kristian says Teressa ...  {\n  ""result"": ""Yes""\n}
+126         126  Question: Amberly lies. Shalonda says Amberly ...   {\n  ""result"": ""No""\n}
+24           24  Question: Delfina tells the truth. Fletcher sa...  {\n  ""result"": ""Yes""\n}
+217         217  Question: Michael lies. Jerry says Michael tel...  {\n  ""result"": ""Yes""\n}
+246         246  Question: Gwenn lies. Maybelle says Gwenn tell...  {\n  ""result"": ""Yes""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                   output
+230         230  Question: Jamey lies. Sal says Jamey tells the...   {\n  ""result"": ""No""\n}
+222         222  Question: Teressa lies. Michael says Teressa t...  {\n  ""result"": ""Yes""\n}
+176         176  Question: Vernell tells the truth. Fidel says ...   {\n  ""result"": ""No""\n}
+88           88  Question: Helene tells the truth. Lorine says ...  {\n  ""result"": ""Yes""\n}
+95           95  Question: Phoebe tells the truth. Helene says ...  {\n  ""result"": ""Yes""\n}
+..          ...                                                ...                      ...
+87           87  Question: Teressa lies. Kristian says Teressa ...  {\n  ""result"": ""Yes""\n}
+126         126  Question: Amberly lies. Shalonda says Amberly ...   {\n  ""result"": ""No""\n}
+24           24  Question: Delfina tells the truth. Fletcher sa...  {\n  ""result"": ""Yes""\n}
+217         217  Question: Michael lies. Jerry says Michael tel...   {\n  ""result"": ""No""\n}
+246         246  Question: Gwenn lies. Maybelle says Gwenn tell...  {\n  ""result"": ""Yes""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                   output
+230         230  Question: Jamey lies. Sal says Jamey tells the...  {\n  ""result"": ""Yes""\n}
+222         222  Question: Teressa lies. Michael says Teressa t...  {\n  ""result"": ""Yes""\n}
+176         176  Question: Vernell tells the truth. Fidel says ...   {\n  ""result"": ""No""\n}
+88           88  Question: Helene tells the truth. Lorine says ...   {\n  ""result"": ""No""\n}
+95           95  Question: Phoebe tells the truth. Helene says ...   {\n  ""result"": ""No""\n}
+..          ...                                                ...                      ...
+87           87  Question: Teressa lies. Kristian says Teressa ...  {\n  ""result"": ""Yes""\n}
+126         126  Question: Amberly lies. Shalonda says Amberly ...   {\n  ""result"": ""No""\n}
+24           24  Question: Delfina tells the truth. Fletcher sa...  {\n  ""result"": ""Yes""\n}
+217         217  Question: Michael lies. Jerry says Michael tel...   {\n  ""result"": ""No""\n}
+246         246  Question: Gwenn lies. Maybelle says Gwenn tell...  {\n  ""result"": ""Yes""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                   output
+230         230  Question: Jamey lies. Sal says Jamey tells the...   {\n  ""result"": ""No""\n}
+222         222  Question: Teressa lies. Michael says Teressa t...  {\n  ""result"": ""Yes""\n}
+176         176  Question: Vernell tells the truth. Fidel says ...   {\n  ""result"": ""No""\n}
+88           88  Question: Helene tells the truth. Lorine says ...   {\n  ""result"": ""No""\n}
+95           95  Question: Phoebe tells the truth. Helene says ...   {\n  ""result"": ""No""\n}
+..          ...                                                ...                      ...
+87           87  Question: Teressa lies. Kristian says Teressa ...  {\n  ""result"": ""Yes""\n}
+126         126  Question: Amberly lies. Shalonda says Amberly ...   {\n  ""result"": ""No""\n}
+24           24  Question: Delfina tells the truth. Fletcher sa...  {\n  ""result"": ""Yes""\n}
+217         217  Question: Michael lies. Jerry says Michael tel...   {\n  ""result"": ""No""\n}
+246         246  Question: Gwenn lies. Maybelle says Gwenn tell...  {\n  ""result"": ""Yes""\n}
+
+[75 rows x 3 columns]]"
+1,0.6933333333333334,"[0.8, 0.8, 0.8]","[0.6933333333333334, 0.7466666666666667, 0.8133333333333334, 0.7333333333333333]","['You are an expert in solving boolean expressions. Return your answer **in JSON** with a single key `result` whose value is either ""True"" or ""False"". This is your task: {input}', 'You are an expert in solving boolean expressions. Carefully evaluate the expression and return your answer **in JSON** with a single key `result` whose value is either ""True"" or ""False"". Ensure to follow the standard precedence rules: NOT is evaluated first, followed by AND, and then OR. This is your task: {input}', 'You are an expert in solving boolean expressions. Carefully evaluate the expression and return your answer **in JSON** with a single key `result` whose value is either ""True"" or ""False"". Ensure to follow the standard precedence rules: NOT is evaluated first, followed by AND, and then OR. \n\nHere are some examples to guide you:\n\n1. Expression: `not True or True and False or False`\n   - Evaluation: \'not True\' is False, then \'False or True and False or False\' is evaluated. \'True and False\' is False, so the expression becomes \'False or False or False\', which simplifies to False.\n   - Result: `""result"": ""False""`\n\n2. Expression: `not (True or True) and False`\n   - Evaluation: \'True or True\' is True, so \'not (True or True)\' becomes \'not True\', which is False. Then, \'False and False\' is evaluated, which is False.\n   - Result: `""result"": ""False""`\n\n3. Expression: `False or not True and not not False`\n   - Evaluation: \'not True\' is False, \'not not False\' is False, so the expression becomes \'False or False and False\'. \'False and False\' is False, and \'False or False\' is False.\n   - Result: `""result"": ""False""`\n\n4. Expression: `False and not (True) or True`\n   - Evaluation: \'not (True)\' becomes False, so the expression simplifies to \'False and False or True\'. \'False and False\' is False, and \'False or True\' is True.\n   - Result: `""result"": ""True""`\n\n5. Expression: `not not not (True and False)`\n   - Evaluation: \'True and False\' is False, then \'not (False)\' is True, \'not not (True)\' is True, and finally \'not (True)\' is False.\n   - Result: `""result"": ""False""`\n\nThis is your task: {input}', 'You are an expert in solving boolean expressions. Carefully evaluate the expression and return your answer **in JSON** with a single key `result` whose value is either ""True"" or ""False"". Ensure to follow the standard precedence rules: NOT is evaluated first, followed by AND, and then OR. \n\nHere are some examples to guide you:\n\n1. Expression: `not True or True and False or False`\n   - Evaluation: \'not True\' is False, then \'False or True and False or False\' is evaluated. \'True and False\' is False, so the expression becomes \'False or False or False\', which simplifies to False.\n   - Result: `""result"": ""False""`\n\n2. Expression: `not (True or True) and False`\n   - Evaluation: \'True or True\' is True, so \'not (True or True)\' becomes \'not True\', which is False. Then, \'False and False\' is evaluated, which is False.\n   - Result: `""result"": ""False""`\n\n3. Expression: `False or not True and not not False`\n   - Evaluation: \'not True\' is False, \'not not False\' is True, so the expression becomes \'False or False and True\'. \'False and True\' is False, and \'False or False\' is False.\n   - Result: `""result"": ""False""`\n\n4. Expression: `False and not (True) or True`\n   - Evaluation: \'not (True)\' becomes False, so the expression simplifies to \'False and False or True\'. \'False and False\' is False, and \'False or True\' is True.\n   - Result: `""result"": ""True""`\n\n5. Expression: `not not not (True and False)`\n   - Evaluation: \'True and False\' is False, then \'not (False)\' is True, \'not not (True)\' is True, and finally \'not (True)\' is False.\n   - Result: `""result"": ""False""`\n\nPlease ensure to provide a detailed step-by-step evaluation of the expression to validate the correctness of your result. This is your task: {input}']",evaluator-bool,"[     Unnamed: 0                                     input                     output
+161         161          True or not not ( not False ) is   {\n  ""result"": ""True""\n}
+147         147        not ( False and True ) and True is   {\n  ""result"": ""True""\n}
+213         213     not True or False or True and True is   {\n  ""result"": ""True""\n}
+190         190        False and True or ( not False ) is   {\n  ""result"": ""True""\n}
+150         150  not True and False or False and False is  {\n  ""result"": ""False""\n}
+..          ...                                       ...                        ...
+231         231             False and not ( ( True ) ) is  {\n  ""result"": ""False""\n}
+71           71       not not not not not not not True is  {\n  ""result"": ""False""\n}
+183         183         ( not True and False or True ) is   {\n  ""result"": ""True""\n}
+249         249          ( not not not False or True ) is   {\n  ""result"": ""True""\n}
+97           97    not True or False and True and True is   {\n  ""result"": ""True""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                     input                     output
+161         161          True or not not ( not False ) is   {\n  ""result"": ""True""\n}
+147         147        not ( False and True ) and True is   {\n  ""result"": ""True""\n}
+213         213     not True or False or True and True is   {\n  ""result"": ""True""\n}
+190         190        False and True or ( not False ) is   {\n  ""result"": ""True""\n}
+150         150  not True and False or False and False is  {\n  ""result"": ""False""\n}
+..          ...                                       ...                        ...
+231         231             False and not ( ( True ) ) is  {\n  ""result"": ""False""\n}
+71           71       not not not not not not not True is  {\n  ""result"": ""False""\n}
+183         183         ( not True and False or True ) is   {\n  ""result"": ""True""\n}
+249         249          ( not not not False or True ) is   {\n  ""result"": ""True""\n}
+97           97    not True or False and True and True is  {\n  ""result"": ""False""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                     input                     output
+161         161          True or not not ( not False ) is         {""result"": ""True""}
+147         147        not ( False and True ) and True is   {\n  ""result"": ""True""\n}
+213         213     not True or False or True and True is         {""result"": ""True""}
+190         190        False and True or ( not False ) is   {\n  ""result"": ""True""\n}
+150         150  not True and False or False and False is  {\n  ""result"": ""False""\n}
+..          ...                                       ...                        ...
+231         231             False and not ( ( True ) ) is        {""result"": ""False""}
+71           71       not not not not not not not True is  {\n  ""result"": ""False""\n}
+183         183         ( not True and False or True ) is         {""result"": ""True""}
+249         249          ( not not not False or True ) is         {""result"": ""True""}
+97           97    not True or False and True and True is  {\n  ""result"": ""False""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                     input                                     output
+161         161          True or not not ( not False ) is        {\n  ""result"": ""True""\n}\n\n\n\n   
+147         147        not ( False and True ) and True is      {\n  ""result"": ""True""\n}\n\n  \n     
+213         213     not True or False or True and True is    {\n  ""result"": ""True""\n}\n\n  \n       
+190         190        False and True or ( not False ) is   {\n  ""result"": ""True""\n}\n\n  \n        
+150         150  not True and False or False and False is     {\n  ""result"": ""False""\n}\n\n  \n     
+..          ...                                       ...                                        ...
+231         231             False and not ( ( True ) ) is              {\n  ""result"": ""False""\n}\n\n
+71           71       not not not not not not not True is                  {\n  ""result"": ""False""\n}
+183         183         ( not True and False or True ) is      {\n  ""result"": ""True""\n}\n\n  \n     
+249         249          ( not not not False or True ) is       {\n  ""result"": ""True""\n}\n\n  \n    
+97           97    not True or False and True and True is  {\n  ""result"": ""False""\n}\n\n  \n        
+
+[75 rows x 3 columns]]"
+2,0.8,"[0.84, 0.76, 0.8]","[0.8, 0.8266666666666667, 0.8133333333333334, 0.8133333333333334]","['You are an expert in sorting words alphabetically. Return your answer **in JSON** with a single key `result` whose value is the alphabetically sorted list of words separated by spaces. This is your task: {input}', 'You are an expert in sorting words alphabetically. Your task is to return the alphabetically sorted list of words from the given input. Ensure that the output is formatted **in JSON** with a single key `result`, and the value should be the sorted list of words separated by spaces. Follow these guidelines:\n\n1. Include all words from the input list exactly once.\n2. Sort the words in strict alphabetical order according to standard dictionary rules.\n3. Ensure no additional words are included in the output.\n\nHere is your task: {input}', 'You are an expert in sorting words alphabetically. Your task is to return the alphabetically sorted list of words from the given input. Ensure that the output is formatted **in JSON** with a single key `result`, and the value should be the sorted list of words separated by spaces. Follow these guidelines:\n\n1. Include all words from the input list exactly once.\n2. Sort the words in strict alphabetical order according to standard dictionary rules.\n3. Ensure no additional words are included in the output.\n\nHere is your task: {input}\n\nExamples for reference:\n\nExample 1:\nInput: List: apple banana cherry\nOutput: \n```json\n{\n  ""result"": ""apple banana cherry""\n}\n```\n\nExample 2:\nInput: List: zebra apple mango\nOutput: \n```json\n{\n  ""result"": ""apple mango zebra""\n}\n```\n\nExample 3:\nInput: List: dog cat elephant\nOutput: \n```json\n{\n  ""result"": ""cat dog elephant""\n}\n```\n\nEnsure that your output strictly follows the format and guidelines provided.', 'You are an expert in sorting words alphabetically. Your task is to return the alphabetically sorted list of words from the given input. Ensure that the output is formatted **in JSON** with a single key `result`, and the value should be the sorted list of words separated by spaces. Follow these guidelines:\n\n1. Include all words from the input list exactly once.\n2. Sort the words in strict alphabetical order according to standard dictionary rules.\n3. Ensure no additional words are included in the output.\n\nHere is your task: {input}\n\nExamples for reference:\n\nExample 1:\nInput: List: apple banana cherry\nOutput: \n```json\n{\n  ""result"": ""apple banana cherry""\n}\n```\n\nExample 2:\nInput: List: zebra apple mango\nOutput: \n```json\n{\n  ""result"": ""apple mango zebra""\n}\n```\n\nExample 3:\nInput: List: dog cat elephant\nOutput: \n```json\n{\n  ""result"": ""cat dog elephant""\n}\n```\n\nExample 4:\nInput: List: nascent muddy\nOutput: \n```json\n{\n  ""result"": ""muddy nascent""\n}\n```\n\nExample 5:\nInput: List: plural dose allstate stalin dyad multitudinous powderpuff\nOutput: \n```json\n{\n  ""result"": ""allstate dose dyad multitudinous powderpuff plural stalin""\n}\n```\n\nEnsure that your output strictly follows the format and guidelines provided. Double-check the alphabetical order to avoid any mistakes.']",evaluator-wordsort,"[     Unnamed: 0                                              input                                             output
+207         207  List: condescend rampant percolate coltish dat...  {\n  ""result"": ""coltish condescend date percol...
+88           88                    List: wreak hidebound bandwidth      {\n  ""result"": ""bandwidth hidebound wreak""\n}
+173         173  List: butterscotch veterinarian kochab molybda...  {\n  ""result"": ""academia amos beautiful butter...
+195         195  List: solvate nat usable kajar downey vision d...  {\n  ""result"": ""aitken barycentric detest down...
+187         187  List: percent maser roadside we're caching dis...  {\n  ""result"": ""caching defend delicious disto...
+..          ...                                                ...                                                ...
+96           96  List: falter tuscarora invigorate porridge wet...  {\n  ""result"": ""antler christiana falter invig...
+238         238  List: spongy separate gabriel jackson quail he...  {\n  ""result"": ""anastomosis backslide calvert ...
+144         144  List: corpulent diagnose code scalp bombproof ...  {\n  ""result"": ""blythe bombproof code corpulen...
+249         249  List: worcestershire bonito fritter dreamboat ...  {\n  ""result"": ""bonito dreamboat fritter hagga...
+33           33  List: convair frighten citizen scrubby birdsee...  {\n  ""result"": ""adonis birdseed citizen contam...
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                                             output
+207         207  List: condescend rampant percolate coltish dat...  {\n  ""result"": ""coltish condescend date percol...
+88           88                    List: wreak hidebound bandwidth      {\n  ""result"": ""bandwidth hidebound wreak""\n}
+173         173  List: butterscotch veterinarian kochab molybda...  {\n  ""result"": ""academia amos beautiful butter...
+195         195  List: solvate nat usable kajar downey vision d...  {\n  ""result"": ""aitken barycentric detest down...
+187         187  List: percent maser roadside we're caching dis...  {\n  ""result"": ""caching defend delicious disto...
+..          ...                                                ...                                                ...
+96           96  List: falter tuscarora invigorate porridge wet...  {\n  ""result"": ""antler christiana falter invig...
+238         238  List: spongy separate gabriel jackson quail he...  {\n  ""result"": ""anastomosis backslide calvert ...
+144         144  List: corpulent diagnose code scalp bombproof ...  {\n  ""result"": ""blythe bombproof code corpulen...
+249         249  List: worcestershire bonito fritter dreamboat ...  {\n  ""result"": ""bonito dreamboat fritter hagga...
+33           33  List: convair frighten citizen scrubby birdsee...  {\n  ""result"": ""adonis birdseed citizen contam...
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                                             output
+207         207  List: condescend rampant percolate coltish dat...  {\n  ""result"": ""coltish condescend date percol...
+88           88                    List: wreak hidebound bandwidth      {\n  ""result"": ""bandwidth hidebound wreak""\n}
+173         173  List: butterscotch veterinarian kochab molybda...  {\n  ""result"": ""academia amos beautiful butter...
+195         195  List: solvate nat usable kajar downey vision d...  {\n  ""result"": ""aitken barycentric detest down...
+187         187  List: percent maser roadside we're caching dis...  {\n  ""result"": ""caching defend delicious disto...
+..          ...                                                ...                                                ...
+96           96  List: falter tuscarora invigorate porridge wet...  {\n  ""result"": ""antler christiana falter invig...
+238         238  List: spongy separate gabriel jackson quail he...  {\n  ""result"": ""anastomosis backslide calvert ...
+144         144  List: corpulent diagnose code scalp bombproof ...  {\n  ""result"": ""blythe bombproof code corpulen...
+249         249  List: worcestershire bonito fritter dreamboat ...  {\n  ""result"": ""bonito dreamboat fritter hagga...
+33           33  List: convair frighten citizen scrubby birdsee...  {\n  ""result"": ""adonis birdseed citizen contam...
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                                             output
+207         207  List: condescend rampant percolate coltish dat...  {\n  ""result"": ""coltish condescend date percol...
+88           88                    List: wreak hidebound bandwidth      {\n  ""result"": ""bandwidth hidebound wreak""\n}
+173         173  List: butterscotch veterinarian kochab molybda...  {\n  ""result"": ""academia amos beautiful butter...
+195         195  List: solvate nat usable kajar downey vision d...  {\n  ""result"": ""aitken barycentric detest down...
+187         187  List: percent maser roadside we're caching dis...  {\n  ""result"": ""caching defend delicious disto...
+..          ...                                                ...                                                ...
+96           96  List: falter tuscarora invigorate porridge wet...  {\n  ""result"": ""antler christiana falter invig...
+238         238  List: spongy separate gabriel jackson quail he...  {\n  ""result"": ""anastomosis backslide calvert ...
+144         144  List: corpulent diagnose code scalp bombproof ...  {\n  ""result"": ""blythe bombproof code corpulen...
+249         249  List: worcestershire bonito fritter dreamboat ...  {\n  ""result"": ""bonito dreamboat fritter hagga...
+33           33  List: convair frighten citizen scrubby birdsee...  {\n  ""result"": ""adonis birdseed citizen contam...
+
+[75 rows x 3 columns]]"
+3,0.7333333333333333,"[0.92, 0.88, 0.92]","[0.7333333333333333, 0.8666666666666667, 0.92, 0.9066666666666666]","['You are an expert in understanding sports. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". This is your task: {input}', 'You are an expert in understanding sports. Your task is to determine if a given sports-related sentence is plausible based on the context of the athlete\'s known sport. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nConsider the following guidelines:\n1. Identify the athlete mentioned in the sentence and their associated sport.\n2. Determine if the action described in the sentence is plausible within the context of that sport.\n3. If the action is plausible, return ""Yes"". If it is not plausible, return ""No"".\n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""Jayson Tatum nutmegged the defender.""\nOutput: {""result"": ""Yes""}\nExplanation: Jayson Tatum is a basketball player, and \'nutmegging\' is a move that can occur in basketball.\n\nExample 2:\nInput: ""Robert Lewandowski threw a touchdown.""\nOutput: {""result"": ""No""}\nExplanation: Robert Lewandowski is a soccer player, and \'throwing a touchdown\' is specific to American football.\n\nExample 3:\nInput: ""Jonas Valanciunas beat the buzzer.""\nOutput: {""result"": ""Yes""}\nExplanation: Jonas Valanciunas is a basketball player, and \'beating the buzzer\' is a common basketball term.\n\nNow, apply these guidelines to the following task: {input}', 'You are an expert in understanding sports. Your task is to determine if a given sports-related sentence is plausible based on the context of the athlete\'s known sport. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nConsider the following guidelines:\n1. Identify the athlete mentioned in the sentence and their associated sport.\n2. Determine if the action described in the sentence is plausible within the context of that sport.\n3. If the action is plausible, return ""Yes"". If it is not plausible, return ""No"".\n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""Jayson Tatum nutmegged the defender.""\nOutput: {""result"": ""Yes""}\nExplanation: Jayson Tatum is a basketball player, and \'nutmegging\' is a move that can occur in basketball.\n\nExample 2:\nInput: ""Robert Lewandowski threw a touchdown.""\nOutput: {""result"": ""No""}\nExplanation: Robert Lewandowski is a soccer player, and \'throwing a touchdown\' is specific to American football.\n\nExample 3:\nInput: ""Jonas Valanciunas beat the buzzer.""\nOutput: {""result"": ""Yes""}\nExplanation: Jonas Valanciunas is a basketball player, and \'beating the buzzer\' is a common basketball term.\n\nExample 4:\nInput: ""Stefon Diggs hit the slant pass.""\nOutput: {""result"": ""No""}\nExplanation: Stefon Diggs is a wide receiver in football, and wide receivers catch passes, not hit them. The term \'hit\' is not used in the context of a wide receiver executing a slant pass in football.\n\nExample 5:\nInput: ""Max Scherzer was safe at first.""\nOutput: {""result"": ""Yes""}\nExplanation: Max Scherzer is a professional baseball player, and being \'safe at first\' is a common baseball action.\n\nNow, apply these guidelines to the following task: {input}', 'You are an expert in understanding sports. Your task is to determine if a given sports-related sentence is plausible based on the context of the athlete\'s known sport. Return your answer **in JSON** with a single key `result` whose value is either ""Yes"" or ""No"". \n\nConsider the following guidelines:\n1. Identify the athlete mentioned in the sentence and their associated sport.\n2. Determine if the action described in the sentence is plausible within the context of that sport.\n3. If the action is plausible, return ""Yes"". If it is not plausible, return ""No"".\n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""Jayson Tatum nutmegged the defender.""\nOutput: {""result"": ""Yes""}\nExplanation: Jayson Tatum is a basketball player, and \'nutmegging\' is a move that can occur in basketball.\n\nExample 2:\nInput: ""Robert Lewandowski threw a touchdown.""\nOutput: {""result"": ""No""}\nExplanation: Robert Lewandowski is a soccer player, and \'throwing a touchdown\' is specific to American football.\n\nExample 3:\nInput: ""Jonas Valanciunas beat the buzzer.""\nOutput: {""result"": ""Yes""}\nExplanation: Jonas Valanciunas is a basketball player, and \'beating the buzzer\' is a common basketball term.\n\nExample 4:\nInput: ""Stefon Diggs caught the slant pass.""\nOutput: {""result"": ""Yes""}\nExplanation: Stefon Diggs is a wide receiver in football, and wide receivers catch passes, including slant passes, making this action plausible.\n\nExample 5:\nInput: ""Max Scherzer was safe at first.""\nOutput: {""result"": ""Yes""}\nExplanation: Max Scherzer is a professional baseball player, and being \'safe at first\' is a common baseball action.\n\nExample 6:\nInput: ""Josh Allen completed the screen pass.""\nOutput: {""result"": ""Yes""}\nExplanation: Josh Allen is a professional football player, and completing a screen pass is a plausible action in football.\n\nExample 7:\nInput: ""Bryce Harper hit a home run.""\nOutput: {""result"": ""Yes""}\nExplanation: Bryce Harper is a professional baseball player, and hitting a home run is a common action in baseball.\n\nNow, apply these guidelines to the following task: {input}']",evaluator-sports,"[     Unnamed: 0                                              input                   output
+217         217            ""Jonathan Marchessault went five hole.""  {\n  ""result"": ""Yes""\n}
+205         205  ""Kwadwo Asamoah beat the shot clock in the Eas...   {\n  ""result"": ""No""\n}
+6             6                     ""David Silva took a throw in.""         {""result"": ""No""}
+247         247  ""Kenta Maeda threw to first base in the Americ...   {\n  ""result"": ""No""\n}
+92           92                    ""Yaya Toure scored a freekick.""  {\n  ""result"": ""Yes""\n}
+..          ...                                                ...                      ...
+88           88  ""Mark Stone spent time in the penalty box in t...        {""result"": ""Yes""}
+47           47             ""Petr Cech bricked the three pointer.""   {\n  ""result"": ""No""\n}
+16           16         ""Freddie Freeman watched the pitch go by.""        {""result"": ""Yes""}
+61           61  ""Tyler Boyd hit the screen pass in the NFC div...   {\n  ""result"": ""No""\n}
+138         138             ""Aaron Nola converted the first down.""   {\n  ""result"": ""No""\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input             output
+217         217            ""Jonathan Marchessault went five hole.""  {""result"": ""Yes""}
+205         205  ""Kwadwo Asamoah beat the shot clock in the Eas...   {""result"": ""No""}
+6             6                     ""David Silva took a throw in.""  {""result"": ""Yes""}
+247         247  ""Kenta Maeda threw to first base in the Americ...  {""result"": ""Yes""}
+92           92                    ""Yaya Toure scored a freekick.""  {""result"": ""Yes""}
+..          ...                                                ...                ...
+88           88  ""Mark Stone spent time in the penalty box in t...  {""result"": ""Yes""}
+47           47             ""Petr Cech bricked the three pointer.""   {""result"": ""No""}
+16           16         ""Freddie Freeman watched the pitch go by.""  {""result"": ""Yes""}
+61           61  ""Tyler Boyd hit the screen pass in the NFC div...  {""result"": ""Yes""}
+138         138             ""Aaron Nola converted the first down.""   {""result"": ""No""}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input             output
+217         217            ""Jonathan Marchessault went five hole.""  {""result"": ""Yes""}
+205         205  ""Kwadwo Asamoah beat the shot clock in the Eas...   {""result"": ""No""}
+6             6                     ""David Silva took a throw in.""  {""result"": ""Yes""}
+247         247  ""Kenta Maeda threw to first base in the Americ...  {""result"": ""Yes""}
+92           92                    ""Yaya Toure scored a freekick.""  {""result"": ""Yes""}
+..          ...                                                ...                ...
+88           88  ""Mark Stone spent time in the penalty box in t...  {""result"": ""Yes""}
+47           47             ""Petr Cech bricked the three pointer.""   {""result"": ""No""}
+16           16         ""Freddie Freeman watched the pitch go by.""  {""result"": ""Yes""}
+61           61  ""Tyler Boyd hit the screen pass in the NFC div...   {""result"": ""No""}
+138         138             ""Aaron Nola converted the first down.""   {""result"": ""No""}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input             output
+217         217            ""Jonathan Marchessault went five hole.""  {""result"": ""Yes""}
+205         205  ""Kwadwo Asamoah beat the shot clock in the Eas...   {""result"": ""No""}
+6             6                     ""David Silva took a throw in.""  {""result"": ""Yes""}
+247         247  ""Kenta Maeda threw to first base in the Americ...  {""result"": ""Yes""}
+92           92                    ""Yaya Toure scored a freekick.""  {""result"": ""Yes""}
+..          ...                                                ...                ...
+88           88  ""Mark Stone spent time in the penalty box in t...  {""result"": ""Yes""}
+47           47             ""Petr Cech bricked the three pointer.""   {""result"": ""No""}
+16           16         ""Freddie Freeman watched the pitch go by.""  {""result"": ""Yes""}
+61           61  ""Tyler Boyd hit the screen pass in the NFC div...   {""result"": ""No""}
+138         138             ""Aaron Nola converted the first down.""   {""result"": ""No""}
+
+[75 rows x 3 columns]]"
+4,0.7733333333333333,"[0.92, 0.84, 0.8]","[0.7733333333333333, 0.8533333333333334, 0.8133333333333334, 0.8133333333333334]","['You are an expert in counting objects. Return your answer **in JSON** with a single key `result` whose value is the number of objects in the input. This is your task: {input}', 'You are an expert in counting specific categories of objects. Your task is to determine the number of items in a specified category from the input list. Return your answer **in JSON** format with a single key `result` whose value is the number of items in the specified category. \n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""I have a clarinet, and a trombone. How many musical instruments do I have?""\nOutput: \n```json\n{""result"": 2}\n```\nExplanation: Both clarinet and trombone are musical instruments.\n\nExample 2:\nInput: ""I have a car, a fridge, an oven, a toaster, a couch, three lamps, five chairs, a stove, and a microwave. How many objects do I have?""\nOutput: \n```json\n{""result"": 15}\n```\nExplanation: All listed items are objects, and their total count is 15.\n\nExample 3:\nInput: ""I have an oven, an apple, three bananas, a table, and two grapes. How many fruits do I have?""\nOutput: \n```json\n{""result"": 6}\n```\nExplanation: The fruits are an apple, three bananas, and two grapes, totaling 6.\n\nExample 4:\nInput: ""I have an accordion, three goats, two cows, a pig, a rabbit, a snake, and a trumpet. How many animals do I have?""\nOutput: \n```json\n{""result"": 8}\n```\nExplanation: The animals are three goats, two cows, a pig, a rabbit, and a snake, totaling 8.\n\nNow, apply this approach to the following task: {input}', 'You are an expert in counting specific categories of objects. Your task is to determine the number of items in a specified category from the input list. Return your answer **in JSON** format with a single key `result` whose value is the number of items in the specified category. \n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""I have a clarinet, and a trombone. How many musical instruments do I have?""\nOutput: \n```json\n{""result"": 2}\n```\nExplanation: Both clarinet and trombone are musical instruments.\n\nExample 2:\nInput: ""I have a car, a fridge, an oven, a toaster, a couch, three lamps, five chairs, a stove, and a microwave. How many objects do I have?""\nOutput: \n```json\n{""result"": 15}\n```\nExplanation: All listed items are objects, and their total count is 15.\n\nExample 3:\nInput: ""I have an oven, an apple, three bananas, a table, and two grapes. How many fruits do I have?""\nOutput: \n```json\n{""result"": 6}\n```\nExplanation: The fruits are an apple, three bananas, and two grapes, totaling 6.\n\nExample 4:\nInput: ""I have an accordion, three goats, two cows, a pig, a rabbit, a snake, and a trumpet. How many animals do I have?""\nOutput: \n```json\n{""result"": 8}\n```\nExplanation: The animals are three goats, two cows, a pig, a rabbit, and a snake, totaling 8.\n\nGuidelines:\n1. Identify the category specified in the question (e.g., musical instruments, objects, fruits, animals, vegetables).\n2. Count only the items that belong to the specified category.\n3. Consider quantity modifiers (e.g., ""three bananas"" means 3 bananas).\n4. Ensure the output is in JSON format with a single key `result`.\n5. Provide a brief explanation of your count to ensure accuracy.\n\nNow, apply this approach to the following task: {input}', 'You are an expert in counting specific categories of objects. Your task is to determine the number of items in a specified category from the input list. Return your answer **in JSON** format with a single key `result` whose value is the number of items in the specified category. \n\nHere are some examples to guide you:\n\nExample 1:\nInput: ""I have a clarinet, and a trombone. How many musical instruments do I have?""\nOutput: \n```json\n{""result"": 2}\n```\nExplanation: Both clarinet and trombone are musical instruments.\n\nExample 2:\nInput: ""I have a car, a fridge, an oven, a toaster, a couch, three lamps, five chairs, a stove, and a microwave. How many objects do I have?""\nOutput: \n```json\n{""result"": 15}\n```\nExplanation: All listed items are objects, and their total count is 15.\n\nExample 3:\nInput: ""I have an oven, an apple, three bananas, a table, and two grapes. How many fruits do I have?""\nOutput: \n```json\n{""result"": 6}\n```\nExplanation: The fruits are an apple, three bananas, and two grapes, totaling 6.\n\nExample 4:\nInput: ""I have an accordion, three goats, two cows, a pig, a rabbit, a snake, and a trumpet. How many animals do I have?""\nOutput: \n```json\n{""result"": 8}\n```\nExplanation: The animals are three goats, two cows, a pig, a rabbit, and a snake, totaling 8.\n\nGuidelines:\n1. Carefully identify the category specified in the question (e.g., musical instruments, objects, fruits, animals, vegetables).\n2. Count only the items that belong to the specified category.\n3. Pay attention to quantity modifiers (e.g., ""three bananas"" means 3 bananas).\n4. Ensure the output is in JSON format with a single key `result`.\n5. Provide a brief explanation of your count to ensure accuracy.\n6. Double-check your count to avoid errors, especially when multiple items or quantities are involved.\n\nNow, apply this approach to the following task: {input}']",evaluator-object,"[     Unnamed: 0                                              input                output
+203         203  I have two violins, a piano, a drum, two flute...  {\n  ""result"": 10\n}
+208         208  I have a stove, a microwave, a couch, a lamp, ...   {\n  ""result"": 9\n}
+42           42  I have a trombone, a violin, a clarinet, an ac...  {\n  ""result"": 13\n}
+74           74  I have a pig, a cow, three frogs, a donkey, a ...  {\n  ""result"": 16\n}
+46           46  I have a trumpet, four trombones, an accordion...   {\n  ""result"": 9\n}
+..          ...                                                ...                   ...
+93           93  I have a trombone, a trumpet, a clarinet, a dr...   {\n  ""result"": 8\n}
+34           34  I have a flute, and an accordion. How many mus...   {\n  ""result"": 2\n}
+131         131  I have a pig, and a donkey. How many animals d...         {""result"": 2}
+61           61  I have a rabbit, a frog, and a snail. How many...   {\n  ""result"": 3\n}
+104         104  I have a bear, two snakes, a rabbit, a microwa...   {\n  ""result"": 8\n}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input          output
+203         203  I have two violins, a piano, a drum, two flute...  {""result"": 10}
+208         208  I have a stove, a microwave, a couch, a lamp, ...  {""result"": 10}
+42           42  I have a trombone, a violin, a clarinet, an ac...  {""result"": 12}
+74           74  I have a pig, a cow, three frogs, a donkey, a ...  {""result"": 16}
+46           46  I have a trumpet, four trombones, an accordion...   {""result"": 9}
+..          ...                                                ...             ...
+93           93  I have a trombone, a trumpet, a clarinet, a dr...   {""result"": 8}
+34           34  I have a flute, and an accordion. How many mus...   {""result"": 2}
+131         131  I have a pig, and a donkey. How many animals d...   {""result"": 2}
+61           61  I have a rabbit, a frog, and a snail. How many...   {""result"": 3}
+104         104  I have a bear, two snakes, a rabbit, a microwa...   {""result"": 8}
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                  output
+203         203  I have two violins, a piano, a drum, two flute...  {\n  ""result"": 10\n}\n
+208         208  I have a stove, a microwave, a couch, a lamp, ...  {\n  ""result"": 10\n}\n
+42           42  I have a trombone, a violin, a clarinet, an ac...  {\n  ""result"": 12\n}\n
+74           74  I have a pig, a cow, three frogs, a donkey, a ...  {\n  ""result"": 16\n}\n
+46           46  I have a trumpet, four trombones, an accordion...   {\n  ""result"": 9\n}\n
+..          ...                                                ...                     ...
+93           93  I have a trombone, a trumpet, a clarinet, a dr...   {\n  ""result"": 8\n}\n
+34           34  I have a flute, and an accordion. How many mus...   {\n  ""result"": 2\n}\n
+131         131  I have a pig, and a donkey. How many animals d...   {\n  ""result"": 2\n}\n
+61           61  I have a rabbit, a frog, and a snail. How many...   {\n  ""result"": 3\n}\n
+104         104  I have a bear, two snakes, a rabbit, a microwa...   {\n  ""result"": 8\n}\n
+
+[75 rows x 3 columns],      Unnamed: 0                                              input                        output
+203         203  I have two violins, a piano, a drum, two flute...        {\n  ""result"": 10\n}\n
+208         208  I have a stove, a microwave, a couch, a lamp, ...        {\n  ""result"": 10\n}\n
+42           42  I have a trombone, a violin, a clarinet, an ac...        {\n  ""result"": 12\n}\n
+74           74  I have a pig, a cow, three frogs, a donkey, a ...        {\n  ""result"": 16\n}\n
+46           46  I have a trumpet, four trombones, an accordion...         {\n  ""result"": 9\n}\n
+..          ...                                                ...                           ...
+93           93  I have a trombone, a trumpet, a clarinet, a dr...         {\n  ""result"": 8\n}\n
+34           34  I have a flute, and an accordion. How many mus...         {\n  ""result"": 2\n}\n
+131         131  I have a pig, and a donkey. How many animals d...         {\n  ""result"": 2\n}\n
+61           61  I have a rabbit, a frog, and a snail. How many...         {\n  ""result"": 3\n}\n
+104         104  I have a bear, two snakes, a rabbit, a microwa...  {\n  ""result"": 8\n}\n  \n   
+
+[75 rows x 3 columns]]"
