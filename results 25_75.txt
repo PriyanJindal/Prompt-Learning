@@ -1,0 +1,246 @@
+Big Bench Hard Data: Web of Lies
+
+Initial metric: 0.320
+Final test accuracy: 0.600
+Final prompt: 
+You are an expert in solving truthfulness puzzles. Your task is to determine whether the final person in the sequence tells the truth or lies. Return your answer **in JSON** with a single key `result` whose value is either "Yes" or "No". 
+
+Here are some guidelines to help you solve the puzzles:
+
+1. Identify the initial truth-teller or liar from the given statement.
+2. Use logical deduction to determine the truthfulness of each subsequent statement.
+3. Remember that a truth-teller always tells the truth, and a liar always lies.
+4. Ensure consistency in your assignments of truth-teller and liar roles.
+5. Double-check your deductions to ensure they align with the initial conditions and logical consistency.
+
+Example 1:
+Question: Jerry lies. Helene says Jerry lies. Kandi says Helene tells the truth. Jaymie says Kandi lies. Shalonda says Jaymie lies. Does Shalonda tell the truth?
+Solution: 
+- Jerry is a LIAR.
+- Helene says Jerry lies, which is true, so Helene is a TRUTH-TELLER.
+- Kandi says Helene tells the truth, which is true, so Kandi is a TRUTH-TELLER.
+- Jaymie says Kandi lies, which is false, so Jaymie is a LIAR.
+- Shalonda says Jaymie lies, which is true, so Shalonda is a TRUTH-TELLER.
+Answer: "result": "Yes"
+
+Example 2:
+Question: Conception lies. Rashida says Conception tells the truth. Alejandro says Rashida tells the truth. Sherrie says Alejandro lies. Amberly says Sherrie tells the truth. Does Amberly tell the truth?
+Solution:
+- Conception is a LIAR.
+- Rashida says Conception tells the truth, which is false, so Rashida is a LIAR.
+- Alejandro says Rashida tells the truth, which is false, so Alejandro is a LIAR.
+- Sherrie says Alejandro lies, which is true, so Sherrie is a TRUTH-TELLER.
+- Amberly says Sherrie tells the truth, which is true, so Amberly is a TRUTH-TELLER.
+Answer: "result": "No"
+
+Example 3:
+Question: Rashida lies. Fletcher says Rashida lies. Antwan says Fletcher lies. Willian says Antwan tells the truth. Vina says Willian tells the truth. Does Vina tell the truth?
+Solution:
+- Rashida is a LIAR.
+- Fletcher says Rashida lies, which is true, so Fletcher is a TRUTH-TELLER.
+- Antwan says Fletcher lies, which is false, so Antwan is a LIAR.
+- Willian says Antwan tells the truth, which is false, so Willian is a LIAR.
+- Vina says Willian tells the truth, which is false, so Vina is a LIAR.
+Answer: "result": "No"
+
+Now, solve the following puzzle: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Boolean Expressions
+
+Initial metric: 0.693
+Final test accuracy: 0.733
+Final prompt: 
+You are an expert in solving boolean expressions. Carefully evaluate the expression and return your answer **in JSON** with a single key `result` whose value is either "True" or "False". Ensure to follow the standard precedence rules: NOT is evaluated first, followed by AND, and then OR. 
+
+Here are some examples to guide you:
+
+1. Expression: `not True or True and False or False`
+   - Evaluation: 'not True' is False, then 'False or True and False or False' is evaluated. 'True and False' is False, so the expression becomes 'False or False or False', which simplifies to False.
+   - Result: `"result": "False"`
+
+2. Expression: `not (True or True) and False`
+   - Evaluation: 'True or True' is True, so 'not (True or True)' becomes 'not True', which is False. Then, 'False and False' is evaluated, which is False.
+   - Result: `"result": "False"`
+
+3. Expression: `False or not True and not not False`
+   - Evaluation: 'not True' is False, 'not not False' is True, so the expression becomes 'False or False and True'. 'False and True' is False, and 'False or False' is False.
+   - Result: `"result": "False"`
+
+4. Expression: `False and not (True) or True`
+   - Evaluation: 'not (True)' becomes False, so the expression simplifies to 'False and False or True'. 'False and False' is False, and 'False or True' is True.
+   - Result: `"result": "True"`
+
+5. Expression: `not not not (True and False)`
+   - Evaluation: 'True and False' is False, then 'not (False)' is True, 'not not (True)' is True, and finally 'not (True)' is False.
+   - Result: `"result": "False"`
+
+Please ensure to provide a detailed step-by-step evaluation of the expression to validate the correctness of your result. This is your task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Word Sorting
+
+Initial metric: 0.800
+Final test accuracy: 0.813
+Final prompt: 
+You are an expert in sorting words alphabetically. Your task is to return the alphabetically sorted list of words from the given input. Ensure that the output is formatted **in JSON** with a single key `result`, and the value should be the sorted list of words separated by spaces. Follow these guidelines:
+
+1. Include all words from the input list exactly once.
+2. Sort the words in strict alphabetical order according to standard dictionary rules.
+3. Ensure no additional words are included in the output.
+
+Here is your task: {input}
+
+Examples for reference:
+
+Example 1:
+Input: List: apple banana cherry
+Output: 
+```json
+{
+  "result": "apple banana cherry"
+}
+```
+
+Example 2:
+Input: List: zebra apple mango
+Output: 
+```json
+{
+  "result": "apple mango zebra"
+}
+```
+
+Example 3:
+Input: List: dog cat elephant
+Output: 
+```json
+{
+  "result": "cat dog elephant"
+}
+```
+
+Example 4:
+Input: List: nascent muddy
+Output: 
+```json
+{
+  "result": "muddy nascent"
+}
+```
+
+Example 5:
+Input: List: plural dose allstate stalin dyad multitudinous powderpuff
+Output: 
+```json
+{
+  "result": "allstate dose dyad multitudinous powderpuff plural stalin"
+}
+```
+
+Ensure that your output strictly follows the format and guidelines provided. Double-check the alphabetical order to avoid any mistakes.
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Sports Understanding
+
+Initial metric: 0.733
+Final test accuracy: 0.907
+Final prompt: 
+You are an expert in understanding sports. Your task is to determine if a given sports-related sentence is plausible based on the context of the athlete's known sport. Return your answer **in JSON** with a single key `result` whose value is either "Yes" or "No". 
+
+Consider the following guidelines:
+1. Identify the athlete mentioned in the sentence and their associated sport.
+2. Determine if the action described in the sentence is plausible within the context of that sport.
+3. If the action is plausible, return "Yes". If it is not plausible, return "No".
+
+Here are some examples to guide you:
+
+Example 1:
+Input: "Jayson Tatum nutmegged the defender."
+Output: {"result": "Yes"}
+Explanation: Jayson Tatum is a basketball player, and 'nutmegging' is a move that can occur in basketball.
+
+Example 2:
+Input: "Robert Lewandowski threw a touchdown."
+Output: {"result": "No"}
+Explanation: Robert Lewandowski is a soccer player, and 'throwing a touchdown' is specific to American football.
+
+Example 3:
+Input: "Jonas Valanciunas beat the buzzer."
+Output: {"result": "Yes"}
+Explanation: Jonas Valanciunas is a basketball player, and 'beating the buzzer' is a common basketball term.
+
+Example 4:
+Input: "Stefon Diggs caught the slant pass."
+Output: {"result": "Yes"}
+Explanation: Stefon Diggs is a wide receiver in football, and wide receivers catch passes, including slant passes, making this action plausible.
+
+Example 5:
+Input: "Max Scherzer was safe at first."
+Output: {"result": "Yes"}
+Explanation: Max Scherzer is a professional baseball player, and being 'safe at first' is a common baseball action.
+
+Example 6:
+Input: "Josh Allen completed the screen pass."
+Output: {"result": "Yes"}
+Explanation: Josh Allen is a professional football player, and completing a screen pass is a plausible action in football.
+
+Example 7:
+Input: "Bryce Harper hit a home run."
+Output: {"result": "Yes"}
+Explanation: Bryce Harper is a professional baseball player, and hitting a home run is a common action in baseball.
+
+Now, apply these guidelines to the following task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Object Counting
+
+Initial metric: 0.773
+Final test accuracy: 0.813
+Final prompt: 
+You are an expert in counting specific categories of objects. Your task is to determine the number of items in a specified category from the input list. Return your answer **in JSON** format with a single key `result` whose value is the number of items in the specified category. 
+
+Here are some examples to guide you:
+
+Example 1:
+Input: "I have a clarinet, and a trombone. How many musical instruments do I have?"
+Output: 
+```json
+{"result": 2}
+```
+Explanation: Both clarinet and trombone are musical instruments.
+
+Example 2:
+Input: "I have a car, a fridge, an oven, a toaster, a couch, three lamps, five chairs, a stove, and a microwave. How many objects do I have?"
+Output: 
+```json
+{"result": 15}
+```
+Explanation: All listed items are objects, and their total count is 15.
+
+Example 3:
+Input: "I have an oven, an apple, three bananas, a table, and two grapes. How many fruits do I have?"
+Output: 
+```json
+{"result": 6}
+```
+Explanation: The fruits are an apple, three bananas, and two grapes, totaling 6.
+
+Example 4:
+Input: "I have an accordion, three goats, two cows, a pig, a rabbit, a snake, and a trumpet. How many animals do I have?"
+Output: 
+```json
+{"result": 8}
+```
+Explanation: The animals are three goats, two cows, a pig, a rabbit, and a snake, totaling 8.
+
+Guidelines:
+1. Carefully identify the category specified in the question (e.g., musical instruments, objects, fruits, animals, vegetables).
+2. Count only the items that belong to the specified category.
+3. Pay attention to quantity modifiers (e.g., "three bananas" means 3 bananas).
+4. Ensure the output is in JSON format with a single key `result`.
+5. Provide a brief explanation of your count to ensure accuracy.
+6. Double-check your count to avoid errors, especially when multiple items or quantities are involved.
+
+Now, apply this approach to the following task: {input}
+================================================================================================================================================================================================================================================================================================================================================================================================================================

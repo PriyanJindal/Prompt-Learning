@@ -27,7 +27,7 @@ from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_sc
 
 # CONFIG: Number of samples to use for the experiment. Adjust as needed.
 NUM_SAMPLES = 100  # Number of rows to sample from the full dataset, 0 for all
-TRAIN_SPLIT_FRACTION = 0.5  # Fraction of data to use for training (rest for testing)
+TRAIN_SPLIT_FRACTION = 0.75  # Fraction of data to use for training (rest for testing)
 NUM_RULES = 50  # Number of rules in the prompt - adjust based on your evaluator prompt (this is NOT working on Config)
 
 # EXPERIMENT CONFIGURATION
@@ -175,7 +175,7 @@ def evaluate_output(dataset, eval_template):
         template=evaluation_template,
         model=eval_model,
         output_parser=evaluate_output_parser,
-        concurrency=40,
+        concurrency=20,
         verbose=True
     )
 
@@ -509,10 +509,11 @@ def simple_test(train_set, test_set, system_prompt, eval_template, results_df, t
     return results, results_df
 
 wol_prompt = "You are an expert in solving truthfulness puzzles. Return your answer **in JSON** with a single key `result` whose value is either \"Yes\" or \"No\". This is your task: {input}"
-bool_prompt = "You are an expert in solving boolean expressions. Return your answer **in JSON** with a single key `result` whose value is either \"True\" or \"False\". This is your task: {input}"
+bool_prompt = "You solve boolean expressions. Return your answer **in JSON** with a single key `result` whose value is either \"True\" or \"False\". This is your task: {input}"
 word_sorting_prompt = "You are an expert in sorting words alphabetically. Return your answer **in JSON** with a single key `result` whose value is the alphabetically sorted list of words separated by spaces. This is your task: {input}"
 sports_prompt = "You are an expert in understanding sports. Return your answer **in JSON** with a single key `result` whose value is either \"Yes\" or \"No\". This is your task: {input}"
 object_prompt = "You are an expert in counting objects. Return your answer **in JSON** with a single key `result` whose value is the number of objects in the input. This is your task: {input}"
+tool_prompt = "You are an expert in using tools to solve problems. You have access to the following functions: {functions}. Use these functions as needed to solve the problem. Return your answer **in JSON** with a single key `result` whose value is the result of the tool use. This is your task: {input}"
 
 columns = ["initial metric", "train", "test", "prompt", "file", "raw"]
 result_df = pd.DataFrame(columns=columns)
@@ -522,10 +523,10 @@ system_prompt = wol_prompt
 eval_template = "evaluator-lies"
 results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
 
-dataset_50, train_set, test_set = data_prep("boolean_inputs")
-system_prompt = bool_prompt
-eval_template = "evaluator-bool"
-results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+# dataset_50, train_set, test_set = data_prep("boolean_inputs")
+# system_prompt = bool_prompt
+# eval_template = "evaluator-bool"
+# results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
 
 dataset_50, train_set, test_set = data_prep("word_sorting_inputs")
 system_prompt = word_sorting_prompt
@@ -541,5 +542,10 @@ dataset_50, train_set, test_set = data_prep("object_inputs")
 system_prompt = object_prompt
 eval_template = "evaluator-object"
 results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
+
+# dataset_50, train_set, test_set = data_prep("tool_inputs")
+# system_prompt = tool_prompt
+# eval_template = "evaluator-tool"
+# results, result_df = simple_test(train_set, test_set, system_prompt, eval_template, result_df)
 
 result_df.to_csv("results.csv")

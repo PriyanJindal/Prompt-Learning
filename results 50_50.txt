@@ -1,0 +1,253 @@
+Big Bench Hard Data: Web of Lies
+Initial metric: 0.280
+Final test accuracy: 0.400
+Final prompt: 
+You are an expert in solving truthfulness puzzles. Carefully analyze the statements and determine the truthfulness of the final statement. Return your answer **in JSON** with a single key `result` whose value is either "Yes" or "No". Follow these steps:
+
+1. Identify the initial truth-teller or liar from the given statement.
+2. Deduce the truthfulness of each subsequent statement based on the initial condition.
+3. Ensure logical consistency throughout the analysis.
+4. Provide the final answer based on the logical deduction.
+
+To help you understand the process, here are a few examples:
+
+Example 1:
+- Initial statement: "Sima lies."
+- Analysis: 
+  - Sima is a LIAR.
+  - Maybelle says Sima tells the truth, so Maybelle is a LIAR.
+  - Audrie says Maybelle lies, which is true, so Audrie is a TRUTH-TELLER.
+  - Leda says Audrie tells the truth, which is true, so Leda is a TRUTH-TELLER.
+  - Shaunda says Leda lies, which is false, so Shaunda is a LIAR.
+- Final answer: Shaunda does not tell the truth, so the result is "No".
+
+Example 2:
+- Initial statement: "Jim lies."
+- Analysis:
+  - Jim is a LIAR.
+  - Yoland says Jim lies, which is true, so Yoland is a TRUTH-TELLER.
+  - Willian says Yoland tells the truth, which is true, so Willian is a TRUTH-TELLER.
+  - Delbert says Willian lies, which is false, so Delbert is a LIAR.
+  - Shalonda says Delbert tells the truth, which is false, so Shalonda is a LIAR.
+- Final answer: Shalonda does not tell the truth, so the result is "No".
+
+Example 3:
+- Initial statement: "Jamey tells the truth."
+- Analysis:
+  - Jamey is a TRUTH-TELLER.
+  - Michael says Jamey lies, which is false, so Michael is a LIAR.
+  - Sherrie says Michael lies, which is true, so Sherrie is a TRUTH-TELLER.
+  - Bernita says Sherrie lies, which is false, so Bernita is a LIAR.
+  - Amberly says Bernita tells the truth, which is false, so Amberly is a LIAR.
+- Final answer: Amberly does not tell the truth, so the result is "No".
+
+Example 4:
+- Initial statement: "Phoebe lies."
+- Analysis:
+  - Phoebe is a LIAR.
+  - Lorine says Phoebe tells the truth, which is false, so Lorine is a LIAR.
+  - Dallas says Lorine lies, which is true, so Dallas is a TRUTH-TELLER.
+  - Alexis says Dallas lies, which is false, so Alexis is a LIAR.
+  - Jim says Alexis tells the truth, which is false, so Jim is a LIAR.
+- Final answer: Jim does not tell the truth, so the result is "No".
+
+This is your task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Boolean Expressions
+Initial metric: 0.700
+Final test accuracy: 0.720
+Final prompt: 
+You are tasked with solving boolean expressions. Please evaluate the expression and return your answer **in JSON** format with a single key `result` whose value is either "True" or "False". 
+
+Here are some guidelines to help you evaluate the expressions correctly:
+1. Apply the NOT operation first, followed by AND, and then OR.
+2. Remember that "NOT NOT A" simplifies to "A".
+3. "A AND NOT A" is always "False".
+4. "A OR True" is always "True".
+5. "A AND False" is always "False".
+6. Evaluate expressions inside parentheses first, following the order of operations.
+
+Examples to guide you:
+
+Example 1:
+Expression: not True or False and True
+Evaluation: 
+- NOT True is False
+- False AND True is False
+- False OR False is False
+Result: {"result": "False"}
+
+Example 2:
+Expression: True and not False or False
+Evaluation:
+- NOT False is True
+- True AND True is True
+- True OR False is True
+Result: {"result": "True"}
+
+Example 3:
+Expression: ( not not not True and True )
+Evaluation:
+- NOT NOT NOT True is False
+- False AND True is False
+Result: {"result": "False"}
+
+Example 4:
+Expression: not not False or False and not True
+Evaluation:
+- NOT NOT False is False
+- NOT True is False
+- False AND False is False
+- False OR False is False
+Result: {"result": "False"}
+
+This is your task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Word Sorting
+Initial metric: 0.720
+Final test accuracy: 0.740
+Final prompt: 
+You are an expert in sorting words alphabetically. Your task is to sort a list of words in strict alphabetical order according to standard dictionary rules. Return your answer **in JSON** format with a single key `result`, whose value is the alphabetically sorted list of words separated by spaces. Ensure that all words from the input list are present exactly once in the output, with no additional words. Consider special characters and punctuation as part of the words when sorting. Here is your task: {input}
+
+Examples for reference:
+
+Example 1:
+Input: List: sioux fortescue purloin percept helmsman
+Output: "result": "fortescue helmsman percept purloin sioux"
+
+Example 2:
+Input: List: emission upon labour whim fairfax ride crepe prig accomplice az doff clatter circumcircle tea wheelbase pleura incantation choral viaduct lorry
+Output: "result": "accomplice az choral circumcircle clatter crepe doff emission fairfax incantation labour lorry pleura prig ride tea upon viaduct wheelbase whim"
+
+Example 3:
+Input: List: griffith common nanosecond loosestrife decoy swabby aerospace denmark yates frill spitz enviable screechy allure sow spermatozoa saute jibe exclusive
+Output: "result": "aerospace allure common decoy denmark enviable exclusive frill griffith jibe loosestrife nanosecond saute screechy sow spitz spermatozoa swabby yates"
+
+Example 4:
+Input: List: plural dose allstate stalin dyad multitudinous powderpuff
+Output: "result": "allstate dose dyad multitudinous powderpuff plural stalin"
+
+Ensure that your output strictly follows the alphabetical order and includes all input words exactly once. Pay special attention to the placement of words with special characters and punctuation, as they should be considered part of the word when sorting.
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Sports Understanding
+Initial metric: 0.640
+Final test accuracy: 0.860
+Final prompt: 
+You are an expert in understanding sports scenarios. Your task is to determine whether the given sports action is plausible based on the athlete's known sport and the context provided. Return your answer **in JSON** with a single key `result` whose value is either "Yes" or "No". 
+
+Consider the following guidelines:
+1. Identify the athlete's primary sport and ensure the action described is plausible within that sport.
+2. Consider the context or event mentioned to ensure it aligns with the athlete's sport.
+3. If the action is common or possible within the athlete's sport, return "Yes". If it is not, return "No".
+4. Pay attention to the role or position of the athlete within their sport, as certain actions may not be typical for specific positions.
+5. Be aware of mixed-sport terminology and ensure the action is relevant to the athlete's sport.
+
+Here are some examples to guide you:
+
+Example 1:
+Input: "Marcell Ozuna hit into a double play."
+Output: {"result": "Yes"}
+Explanation: Marcell Ozuna is a professional baseball player, and hitting into a double play is a common occurrence in baseball.
+
+Example 2:
+Input: "Draymond Green threw a touchdown."
+Output: {"result": "No"}
+Explanation: Draymond Green is a basketball player, and throwing a touchdown is an action specific to American football.
+
+Example 3:
+Input: "Juan Mata scored a bicycle kick in the Champions League Final."
+Output: {"result": "Yes"}
+Explanation: Juan Mata is a soccer player, and scoring a bicycle kick is a realistic action in soccer, especially in the context of the Champions League Final.
+
+Example 4:
+Input: "Mitchell Trubisky caught the screen pass."
+Output: {"result": "No"}
+Explanation: Mitchell Trubisky is a quarterback in American football, and quarterbacks typically throw passes rather than catch them.
+
+Example 5:
+Input: "Jayson Tatum was called for the goal tend."
+Output: {"result": "Yes"}
+Explanation: Jayson Tatum is a basketball player, and 'goal tend' is a basketball term, making the action plausible.
+
+Example 6:
+Input: "Carson Wentz caught the screen pass."
+Output: {"result": "Yes"}
+Explanation: Carson Wentz is a football player, and catching a screen pass is a common action in football.
+
+Example 7:
+Input: "Kawhi Leonard took a turnaround jumper."
+Output: {"result": "Yes"}
+Explanation: Kawhi Leonard is a professional basketball player, and a 'turnaround jumper' is a common basketball move.
+
+Now, apply these guidelines to the following task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
+Big Bench Hard Data: Object Counting
+Initial metric: 0.700
+Final test accuracy: 0.740
+Final prompt: 
+You are an expert in counting objects. Your task is to determine the number of specific items in a given list. Please follow these instructions carefully:
+
+1. Identify the category of items to count (e.g., vegetables, animals, musical instruments, objects, fruits) as specified in the input.
+2. Count only the items that belong to the specified category.
+3. Ensure that you account for the quantity of each item mentioned in the list.
+4. Return your answer in **JSON** format with a single key `result` whose value is the total count of the specified items.
+
+Here are some examples to guide you:
+
+Example 1:
+Input: I have a fish, a bear, and a frog. How many animals do I have?
+Output: 
+```json
+{
+  "result": 3
+}
+```
+Explanation: The list includes a fish, a bear, and a frog, all of which are animals. The total count is 3.
+
+Example 2:
+Input: I have a trombone, three clarinets, an accordion, two violins, a flute, a drum, a trumpet, and a piano. How many musical instruments do I have?
+Output: 
+```json
+{
+  "result": 11
+}
+```
+Explanation: The list includes a trombone (1), three clarinets (3), an accordion (1), two violins (2), a flute (1), a drum (1), a trumpet (1), and a piano (1). The total count is 11.
+
+Example 3:
+Input: I have a grape, an apple, a strawberry, a nectarine, a banana, two raspberries, and a plum. How many fruits do I have?
+Output: 
+```json
+{
+  "result": 8
+}
+```
+Explanation: The list includes a grape, an apple, a strawberry, a nectarine, a banana, two raspberries, and a plum. The total count is 8.
+
+Example 4:
+Input: I have a lamp, an oven, four couches, a chair, a fridge, a toaster, a microwave, a bed, a car, and a table. How many objects do I have?
+Output: 
+```json
+{
+  "result": 12
+}
+```
+Explanation: The list includes a lamp, an oven, four couches, a chair, a fridge, a toaster, a microwave, a bed, a car, and a table. The total count is 12.
+
+Example 5:
+Input: I have a peach, an accordion, two clarinets, a drum, a raspberry, two grapes, and a nectarine. How many fruits do I have?
+Output: 
+```json
+{
+  "result": 5
+}
+```
+Explanation: The list includes a peach, a raspberry, two grapes, and a nectarine. The total count is 5.
+
+Now, here is your task: {input}
+
+================================================================================================================================================================================================================================================================================================================================================================================================================================
