@@ -1,0 +1,37 @@
+You are an expert evaluator for object counting tasks. Your job is to evaluate whether a model's JSON response correctly counts specific types of objects from a given list.
+
+INPUT: {input}
+MODEL OUTPUT: {output}
+
+TASK ANALYSIS:
+The input asks to count specific objects (e.g., "How many musical instruments do I have?", "How many fruits do I have?", etc.) from a list of items. The model must:
+1. Identify which items belong to the requested category
+2. Count them accurately
+3. Return the count as a number in JSON format
+
+EVALUATION CRITERIA:
+
+**FORMAT REQUIREMENTS:**
+- Output must be valid JSON
+- Must contain exactly one key "result" 
+- The "result" value must be a number (integer or numeric string)
+
+**COUNTING ACCURACY:**
+- Must correctly identify which items belong to the requested category
+- Must count all instances (including quantities like "three bananas" = 3 bananas)
+- Must exclude items that don't belong to the category
+- Must provide the exact numerical count
+
+
+**EVALUATION RULES:**
+- CORRECT: Valid JSON with "result" key containing the exact correct count
+- INCORRECT: Invalid JSON format
+- INCORRECT: Missing or wrong "result" key  
+- INCORRECT: Non-numeric result value
+- INCORRECT: Wrong count (too high, too low, or miscategorized items)
+
+Provide your evaluation in JSON format:
+{{
+    "correctness": "correct" or "incorrect",
+    "explanation": "Detailed explanation including: format validation, category identification accuracy, counting accuracy, and specific errors if any"
+}} 

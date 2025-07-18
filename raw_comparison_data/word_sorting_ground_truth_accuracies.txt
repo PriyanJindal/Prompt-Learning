@@ -1,0 +1,3 @@
+iteration	ground_truth_accuracy	task_type
+0	0.82	sorting
+1	0.86	sorting

@@ -1,8 +1,11 @@
-arize-phoenix-evals
-arize-phoenix-client
-tiktoken
-openai
-arize-toolkit==1.0.5
-pandas
-scikit-learn
-nest-asyncio
+pandas>=1.3.0
+scikit-learn>=1.0.0
+requests>=2.25.0
+nest-asyncio>=1.5.0
+openai>=1.0.0
+tiktoken>=0.4.0
+email-validator>=2.0.0
+# Note: MetaPromptOptimizer has been renamed to PromptLearningOptimizer
+arize-toolkit>=0.1.0
+arize-phoenix-evals>=0.1.0
+arize-phoenix-client>=0.1.0

@@ -1,0 +1,2 @@
+iteration	ground_truth_accuracy	task_type
+0	0.94	general

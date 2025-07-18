@@ -1,0 +1,3 @@
+iteration	ground_truth_accuracy	task_type
+0	0.86	counting
+1	0.72	counting

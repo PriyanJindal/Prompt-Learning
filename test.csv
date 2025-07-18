@@ -1,51 +1,51 @@
-Unnamed: 0,input
-238,False and not ( not not True ) is
-57,False or not ( False ) or True is
-171,False and False or not True and False is
-29,not False or True and False or False is
-119,not True and ( True and True ) is
-195,not False and not not True and True is
-67,True and not False or False and False is
-80,True and ( False ) or not False is
-148,not ( True and True ) or False is
-45,( not False and False and False ) is
-163,not not True and True and not True is
-210,True and not ( False or False ) is
-109,False or not True or True and False is
-230,not ( False ) and ( True ) is
-216,( not False or False and True ) is
-43,not False or True and not not True is
-192,not ( ( False and True ) ) is
-36,False or True or False and not False is
-184,not ( not not True ) or False is
-46,( ( not True ) or True ) is
-134,False and False or False or not True is
-167,True or False or not True or True is
-85,not not ( False and not False ) is
-106,False and not ( False and True ) is
-194,False and not False or False and True is
-68,True or ( not ( True ) ) is
-107,( True or not not not False ) is
-234,True or False and not False and True is
-18,False and False and False or not False is
-14,not not True and not True or True is
-137,( False ) and ( not False ) is
-121,not False or ( True or True ) is
-47,not not ( not False or True ) is
-189,not False and ( False or False ) is
-139,False and True and ( not False ) is
-221,( False or not False and False ) is
-135,False or ( not ( False ) ) is
-89,False or not False or True and True is
-95,False or not False and ( False ) is
-72,( not False ) and False or True is
-130,False and False and not True and False is
-199,False or False or not True or False is
-200,False or False or True and not False is
-87,False and not ( False or False ) is
-212,not True or not False and not True is
-206,True and False and not True or False is
-124,False or not False or True or True is
-231,False and not ( ( True ) ) is
-235,( ( not True and True ) ) is
-236,not ( False ) or not not False is
+input
+"Is the following sentence plausible? ""David Silva took a throw in."""
+"Is the following sentence plausible? ""Carlos Tevez skated backwards."""
+"Is the following sentence plausible? ""Wayne Rooney threw a touchdown in the Superbowl."""
+"Is the following sentence plausible? ""Ryan Nugent-Hopkins killed the powerplay."""
+"Is the following sentence plausible? ""Robin Lehner launched the desperation heave."""
+"Is the following sentence plausible? ""Jordan Binnington scored in the third period."""
+"Is the following sentence plausible? ""Frederik Andersen crossed the blue line in the Stanley Cup."""
+"Is the following sentence plausible? ""Kenta Maeda threw to first base in the American League Championship Series."""
+"Is the following sentence plausible? ""Giorgio Chiellini committed a handball in the FA Cup."""
+"Is the following sentence plausible? ""Malcolm Brogdon drove into the restricted area in the Eastern Conference Finals."""
+"Is the following sentence plausible? ""Fred VanVleet passed the puck."""
+"Is the following sentence plausible? ""Patrick Kane backhanded a shot in the Stanley Cup."""
+"Is the following sentence plausible? ""Pierre-Luc Dubois skated backwards."""
+"Is the following sentence plausible? ""Tom Brady converted the first down."""
+"Is the following sentence plausible? ""Nick Foles lost control of the puck."""
+"Is the following sentence plausible? ""Pete Alonso hit a triple in the World Series."""
+"Is the following sentence plausible? ""Walker Buehler earned a trip to the penalty box."""
+"Is the following sentence plausible? ""Diego Forlan did a maradona on the defender."""
+"Is the following sentence plausible? ""Gleyber Torres scored a bicycle kick."""
+"Is the following sentence plausible? ""Nathan MacKinnon bricked the three pointer in the Eastern Conference Finals."""
+"Is the following sentence plausible? ""Nick Castellanos hit the wheel route."""
+"Is the following sentence plausible? ""Mike Williams fumbled the ball in the Superbowl."""
+"Is the following sentence plausible? ""Ryan Fitzpatrick scored a touchdown."""
+"Is the following sentence plausible? ""Leon Draisaitl grounded out to second base in the National League Championship Series."""
+"Is the following sentence plausible? ""Jonathan Marchessault went five hole."""
+"Is the following sentence plausible? ""Brandon Woodruff set the hard screen in the Eastern Conference Finals."""
+"Is the following sentence plausible? ""Juan Soto took ball four."""
+"Is the following sentence plausible? ""Jamison Crowder drew a flag on the play."""
+"Is the following sentence plausible? ""Thomas Muller hit a triple."""
+"Is the following sentence plausible? ""Nerlens Noel was out at home."""
+"Is the following sentence plausible? ""Luis Robert was out at second."""
+"Is the following sentence plausible? ""John Carlson entered the attacking zone in the Stanley Cup."""
+"Is the following sentence plausible? ""Sean Couturier passed the puck in the Stanley Cup."""
+"Is the following sentence plausible? ""Trae Young got into the endzone."""
+"Is the following sentence plausible? ""Klaas Jan Huntelaar shot the puck."""
+"Is the following sentence plausible? ""Mikal Bridges scored a windmill dunk."""
+"Is the following sentence plausible? ""Drew Brees was flagged on the play."""
+"Is the following sentence plausible? ""Sterling Shepard converted the first down."""
+"Is the following sentence plausible? ""T.Y. Hilton drew a flag on the play."""
+"Is the following sentence plausible? ""George Springer committed a blocking foul."""
+"Is the following sentence plausible? ""Caris LeVert scored a reverse layup."""
+"Is the following sentence plausible? ""Travis Konecny did a maradona on the defender."""
+"Is the following sentence plausible? ""Steven Stamkos hit the slant pass."""
+"Is the following sentence plausible? ""DeVante Parker was called for icing."""
+"Is the following sentence plausible? ""Jack Flaherty walked to first base in the National League Championship Series."""
+"Is the following sentence plausible? ""Aleksander Barkov passed the puck."""
+"Is the following sentence plausible? ""Jonathan Marchessault scored on the power play in the Stanley Cup."""
+"Is the following sentence plausible? ""Sean Couturier maradona'd the defender."""
+"Is the following sentence plausible? ""Dylan Larkin walked on ball four."""
+"Is the following sentence plausible? ""Aleksander Barkov bricked the three pointer."""

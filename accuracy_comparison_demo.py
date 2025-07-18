@@ -83,7 +83,7 @@ def calculate_boolean_accuracy_detailed(model_outputs, ground_truth):
             
             # Show first 10 and last 5 for brevity
             if i < 10 or i >= total_count - 5:
-                print(f"{idx:3d}  | {target_str:6s} | {output_json:23s} | {predicted_str:9s} | {str(is_correct):5s} | {status}")
+                print(f"{idx:3d}  | {target_str:6s} | {output_json:23s} | {predicted_str:9s} | {is_correct:5s} | {status}")
             elif i == 10:
                 print("...  | ...    | ...                     | ...       | ...   | ...")
             

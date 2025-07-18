@@ -1,4 +1,22 @@
-# Python
+# BigBench Hard Download Directory
+bbh-download/
+download_dir/
+
+# Data Files
+*.csv
+*.json
+train.csv
+test.csv
+bbh_results.csv
+results.csv
+
+# Python Virtual Environment
+bbh_venv/
+venv/
+env/
+.env
+
+# Python Cache
 __pycache__/
 *.py[cod]
 *$py.class
@@ -16,97 +34,31 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# API Keys and Environment Variables
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# Research specific
-*.log
-*.tmp
-*.temp
-.DS_Store
-Thumbs.db
-
-# Data files (large datasets)
-*.csv.bak
-*.json.bak
-*.parquet
-*.h5
-*.hdf5
-
-# Model files
-*.pkl
-*.pickle
-*.joblib
-*.model
-
-# Results and outputs
-results/
-outputs/
-logs/
-checkpoints/
-
-# API keys and secrets
 .env.local
+.env.development
 .env.production
-secrets.json
-config.json
+openai_api_key.txt
 
-# IDE
+# IDEs and Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# MacOS
 .DS_Store
 .DS_Store?
 ._*
@@ -115,31 +67,48 @@ config.json
 ehthumbs.db
 Thumbs.db
 
-# Temporary files
+# Windows
 *.tmp
-*.temp
 *.bak
-*.backup
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 
-# LaTeX
-*.aux
+# Logs
 *.log
-*.out
-*.toc
-*.lof
-*.lot
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-*.bbl
-*.blg
-*.bcf
-*.run.xml
+logs/
 
-# PDFs (optional - uncomment if you don't want to track PDFs)
-# *.pdf
+# Temporary files
+tmp/
+temp/
+*.tmp
 
-# Large files
+# Experiment Results
+experiment_results_*.csv
+experiment_results_*.json
+*_experiment_results_*.csv
+multi_rule_experiments.json
+single_experiment_results.json
+bbh_ground_truth_comparison.csv
+
+# Keep these experiment files (not ignored)
+!experiment_summary_table.txt
+!raw_comparison_data/
+!raw_comparison_data/**
+!manual_accuracy_demo.py
+!debug_counting.py
+
+# Model outputs and checkpoints
+models/
+checkpoints/
+*.pkl
+*.h5
+*.ckpt
+
+# Large data files
 *.zip
 *.tar.gz
 *.rar 

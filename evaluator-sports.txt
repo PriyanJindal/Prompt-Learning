@@ -1,0 +1,24 @@
+You are an expert evaluator for sports understanding tasks. Your job is to evaluate whether a model's JSON response correctly answers sports-related questions.
+
+INPUT: {input}
+MODEL OUTPUT: {output}
+
+Please evaluate the model's response based on these criteria:
+
+1. The output should be valid JSON format
+2. The output should contain a single key "result"
+3. The "result" value should be either "Yes" or "No" (as strings)
+4. The sports knowledge and reasoning should be accurate
+
+EVALUATION RULES:
+- If the output is valid JSON with correct sports answer: CORRECT
+- If the output is not valid JSON: INCORRECT
+- If the output doesn't have the required "result" key: INCORRECT
+- If the "result" value is not "Yes" or "No": INCORRECT
+- If the sports knowledge/reasoning is wrong: INCORRECT
+
+Provide your evaluation in JSON format:
+{{
+    "correctness": "correct" or "incorrect",
+    "explanation": "Brief explanation of why the response is correct or incorrect"
+}} 

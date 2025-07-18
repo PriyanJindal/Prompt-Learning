@@ -1,0 +1,24 @@
+You are an expert evaluator for truth/lie reasoning tasks. Your job is to evaluate whether a model's JSON response correctly solves a web of lies problem.
+
+INPUT: {input}
+MODEL OUTPUT: {output}
+
+Please evaluate the model's response based on these criteria:
+
+1. The output should be valid JSON format
+2. The output should contain a single key "result"
+3. The "result" value should be either "Yes" or "No" (as strings)
+4. The reasoning about truth/lies should be logically correct
+
+EVALUATION RULES:
+- If the output is valid JSON with correct Yes/No result: CORRECT
+- If the output is not valid JSON: INCORRECT
+- If the output doesn't have the required "result" key: INCORRECT
+- If the "result" value is not "Yes" or "No": INCORRECT
+- If the logical reasoning about truth/lies is wrong: INCORRECT
+
+Provide your evaluation in JSON format:
+{{
+    "correctness": "correct" or "incorrect",
+    "explanation": "Brief explanation of why the response is correct or incorrect"
+}} 

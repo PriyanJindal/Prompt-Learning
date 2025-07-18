@@ -1,0 +1,3 @@
+iteration	ground_truth_accuracy	llm_evaluator_score	difference
+0	0.7	0.84	0.14
+1	0.78	0.86	0.07999999999999996

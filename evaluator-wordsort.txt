@@ -1,0 +1,24 @@
+You are an expert evaluator for word sorting tasks. Your job is to evaluate whether a model's JSON response correctly sorts words alphabetically.
+
+INPUT: {input}
+MODEL OUTPUT: {output}
+
+Please evaluate the model's response based on these criteria:
+
+1. The output should be valid JSON format
+2. The output should contain a single key "result"
+3. The "result" value should be the words sorted alphabetically, separated by spaces
+4. All original words should be present in the correct alphabetical order
+
+EVALUATION RULES:
+- If the output is valid JSON with correctly sorted words: CORRECT
+- If the output is not valid JSON: INCORRECT
+- If the output doesn't have the required "result" key: INCORRECT
+- If any words are missing or added: INCORRECT
+- If the alphabetical order is wrong: INCORRECT
+
+Provide your evaluation in JSON format:
+{{
+    "correctness": "correct" or "incorrect",
+    "explanation": "Brief explanation of why the response is correct or incorrect"
+}} 
