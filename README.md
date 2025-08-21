@@ -70,7 +70,7 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 |--------------|----------------|----------------|---------------|
 | 10 | 0% | 84% | 100% |
 | 50 | 0% | 66% | 82% |
-| 100 | 0% | 42% | 67% |
+| 100 | 0% |0% | 67% |
 
 ### Key Findings
 
