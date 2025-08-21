@@ -66,11 +66,11 @@ We chose a JSON generation problem where models had to generate JSON for a webpa
 
 ### Table 1: Prompt Learning Performance
 
-| Ruleset Size | Initial Accuracy | Test Accuracy - 1 loop| Test Accuracy - 5 loops |
-|--------------|----------------|----------------|---------------|
-| 10 | 0% | 84% | 100% |
-| 50 | 0% | 66% | 82% |
-| 100 | 0% |0% | 67% |
+| Ruleset Size | Initial Accuracy | Baseline Accuracy w/ Ruleset | Test Accuracy - 1 loop| Test Accuracy - 5 loops | 
+|--------------|----------------|----------------|----------------|---------------|
+| 10 | 0% | 41% | 84% | 100% |
+| 50 | 0% | 14% | 66% | 82% |
+| 100 | 0% | 6% | 0% | 67% |
 
 ### Key Findings
 
